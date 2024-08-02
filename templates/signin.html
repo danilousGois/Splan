@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form action="{{url_for('validarsignin')}}" method="post">
+            <div>
+                <label for="email">Informe um e-mail</label>
+                <input type="text" name="email" id="">
+            </div>
+            <div>
+                label for="senha">Defina uma senha</label>
+                <input type="text" name="senha" id="">
+            </div>
+            <div>
+                label for="corfirmarsenha">Confirme sua senha</label>
+                <input type="text" name="confirmarsenha" id="">
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>

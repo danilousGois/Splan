@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/estilo.css')}}">
 </head>
 <body>
     <div>
-        <!--<img src="/static/cesimar.jpg" alt=""</img>-->
-        <img src="{{url_for('static',filename='img/cesimar.jpg')}}" alt="">
+        <u>
+            <li><a href="{{url_for('login_signin', valor='login')}}">Login</a></li>
+            <li><a href="{{url_for('login_signin', valor='signin')}}">Signin</a></li>
+        </u>
     </div>
 </body>
 </html>

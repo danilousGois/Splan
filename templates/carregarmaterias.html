@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends "base_landingpage.html" %}
+
+    {% block conteudo %}
+        <div>
+            <h2>Bem vindo(a) à matéria de {{materia.nome}}</h2>
+        </div>
+        <div>
+            <p>Aqui estão os assuntos desta matéria:</p>
+            <ul>
+                {% for assunto in materia.conteudos: %}
+                    <li>{{assunto}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endblock %}
+</body>
+</html>
