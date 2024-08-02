@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
+from flask import flash, redirect
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'chave secreta projeto PSI'
 
 
 @app.route('/')
@@ -9,7 +11,7 @@ def index():
 
 
 @app.route('/<valor>')
-def login_signin():
+def login_signin(valor):
    renderizar_arquivo = ''
 
    if valor == 'login':
@@ -19,20 +21,46 @@ def login_signin():
 
    return render_template(renderizar_arquivo + '.html')
 
+
+
 @app.route('/signin', methods=['POST'])
 def validarsignin():
-   email = request.form['email']
-   senha = request.form['senha']
+   emailUser = request.form['email']
+   senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
 
-   if senha != confirmarsenha:
-      
+   if senhaUser != confirmarsenha:
+      flash('A confirmação da senha está incorreta!')
+      redirect('/signin')
+      # fazer a verificação do email
+   else:
+      pass
+
+   return render_template('login.html')
 
 
-@app.route('/login')
+
+
+@app.route('/login', methods=['POST'])
 def verificarlogin():
-   if email != '' and senha != '':
+   emailUser = "danilo"
+   senhaUser = "123"
+   senha = request.form['senha']
+   email = request.form['email']
 
+   if emailUser == '' and senhaUser == '':
+      flash('Verificamos que ainda não possui um cadastro no nosso sistema! Faça agora mesmo!')
+      redirect('/signin')
+   elif senha != senhaUser:
+      flash('Senha inválida!')
+      redirect('/login')
+   elif email != emailUser:
+      flash('E-mail inválida')
+      redirect('/login')
+   else:
+      pass
+
+   return render_template('base_landingpage.html')
 
 
 
@@ -65,7 +93,6 @@ def carregarmateria(materia):
          'conteudos': ['idade média', 'idade antiga', 'américa espanhola', 'renascimento','Rgito antigo', 'Grécia antiga']
       }
    }
-
 
    return render_template('carregarmaterias.html', materia=materias[materia])
 
