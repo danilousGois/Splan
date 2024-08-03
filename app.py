@@ -12,7 +12,10 @@ def index():
 
 @app.route('/<valor>')
 def paginainicial(valor):
-   return render_template(valor + '.html')
+   if valor == 'login':
+      return render_template('login.html')
+   else:
+      return render_template('signin.html')
 
 
 @app.route('/inicio', methods=['POST'])
@@ -20,7 +23,7 @@ def verificarlogin():
    email = request.form['email']
    senha = request.form['senha']
 
-   if senha == '123' and email == 'danilo':
+   if senha == 'senha' and email == '123':
       return render_template('base_landingpage.html')
    else:
       return render_template('login.html')
@@ -41,9 +44,7 @@ def validarsignin():
    
 
 
-
-
-@app.route('/<materia>')
+@app.route('/inicio/<materia>')
 def carregarmateria(materia):
 
    materias = {
