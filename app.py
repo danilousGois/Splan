@@ -11,15 +11,20 @@ def index():
 
 
 @app.route('/<valor>')
-def login_signin(valor):
-   renderizar_arquivo = ''
+def paginainicial(valor):
+   return render_template(valor + '.html')
 
-   if valor == 'login':
-      renderizar_arquivo = 'login'
+
+@app.route('/inicio', methods=['POST'])
+def verificarlogin():
+   email = request.form['email']
+   senha = request.form['senha']
+
+   if senha == '123' and email == 'danilo':
+      return render_template('base_landingpage.html')
    else:
-      renderizar_arquivo = 'signin'
-
-   return render_template(renderizar_arquivo + '.html')
+      return render_template('login.html')
+   # fazer o resto das verificações
 
 
 
@@ -29,38 +34,12 @@ def validarsignin():
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
 
-   if senhaUser != confirmarsenha:
-      flash('A confirmação da senha está incorreta!')
-      redirect('/signin')
-      # fazer a verificação do email
+   if senhaUser == confirmarsenha:
+      return render_template('login.html')
    else:
-      pass
+      return render_template('signin.html')
+   
 
-   return render_template('login.html')
-
-
-
-
-@app.route('/login', methods=['POST'])
-def verificarlogin():
-   emailUser = "danilo"
-   senhaUser = "123"
-   senha = request.form['senha']
-   email = request.form['email']
-
-   if emailUser == '' and senhaUser == '':
-      flash('Verificamos que ainda não possui um cadastro no nosso sistema! Faça agora mesmo!')
-      redirect('/signin')
-   elif senha != senhaUser:
-      flash('Senha inválida!')
-      redirect('/login')
-   elif email != emailUser:
-      flash('E-mail inválida')
-      redirect('/login')
-   else:
-      pass
-
-   return render_template('base_landingpage.html')
 
 
 
