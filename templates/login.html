@@ -7,6 +7,8 @@
 </head>
 <body>
     <div>
+        {% block conteudo %}
+        {% endblock %}
         <form action="{{url_for('verificarlogin')}}" method="post">
             <div>
                 <label for="email">E-mail</label>

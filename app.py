@@ -12,36 +12,51 @@ def index():
 
 @app.route('/<valor>')
 def paginainicial(valor):
-   if valor == 'login':
+   if valor == 'autenticar':
       return render_template('login.html')
    else:
       return render_template('signin.html')
 
 
-@app.route('/inicio', methods=['POST'])
-def verificarlogin():
-   email = request.form['email']
-   senha = request.form['senha']
-
-   if senha == 'senha' and email == '123':
-      return render_template('base_landingpage.html')
-   else:
-      return render_template('login.html')
-   # fazer o resto das verificações
-
-
-
-@app.route('/signin', methods=['POST'])
+@app.route('/cadastrar', methods=['POST'])
 def validarsignin():
    emailUser = request.form['email']
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
 
-   if senhaUser == confirmarsenha:
-      return render_template('login.html')
+   if senhaUser != '' and confirmarsenha != '' and emailUser != '':
+      if senhaUser == confirmarsenha:
+         return redirect('/autenticar')
+      else:
+         flash('Senha e confirmação devem ser iguais!')
+         return redirect('/cadastrar')
    else:
-      return render_template('signin.html')
-   
+      flash('Todos os campos devem ser preenchidos!')
+      return redirect('/cadastrar')
+      
+
+
+
+@app.route('/autenticar', methods=['POST'])
+def verificarlogin():
+   email = request.form['email']
+   senha = request.form['senha']
+
+   if senha == 'danilo' and email == "123":
+      return render_template('base_landingpage.html')
+   else:
+      return render_template('login.html')
+   # fazer o resto das verificações
+
+@app.route('/cadastroinvalido')
+def cadastroInvalido():
+   return render_template('cadastro_invalido.html')
+
+
+@app.route('/autenticacaoinvalida')
+def autenticacaoInvalida():
+   return render_template('login_invalido.html')
+
 
 
 @app.route('/inicio/<materia>')
