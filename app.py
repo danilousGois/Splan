@@ -36,26 +36,26 @@ def validarsignin():
       
 
 
-
 @app.route('/autenticar', methods=['POST'])
 def verificarlogin():
    email = request.form['email']
    senha = request.form['senha']
 
-   if senha == 'danilo' and email == "123":
-      return render_template('base_landingpage.html')
+   if senha != '' and email != '':
+      if email == 'danilo' and senha == '123':
+         return render_template('base_landingpage.html')
+      elif email != 'danilo' and senha != '123':
+         flash('Dados incorretos!')
+         return redirect('/autenticar')
+      elif email == 'danilo' and senha != '123':
+         flash('Senha incorreta!')
+         return redirect('/autenticar')
+      elif email != 'danilo' and senha == '123':
+         flash('E-mail incorreto')
+         return redirect('/autenticar')
    else:
-      return render_template('login.html')
-   # fazer o resto das verificações
-
-@app.route('/cadastroinvalido')
-def cadastroInvalido():
-   return render_template('cadastro_invalido.html')
-
-
-@app.route('/autenticacaoinvalida')
-def autenticacaoInvalida():
-   return render_template('login_invalido.html')
+      flash('Todos os campos devem ser preenchidos!')
+      return redirect('/autenticar')
 
 
 

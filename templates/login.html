@@ -7,8 +7,14 @@
 </head>
 <body>
     <div>
-        {% block conteudo %}
-        {% endblock %}
+        {% set mensagens = get_flashed_messages() %}
+        {% if mensagens %}
+            <p>
+                {% for msg in mensagens %}
+                    {{msg}}
+                {% endfor %}
+            </p>
+        {% endif %}
         <form action="{{url_for('verificarlogin')}}" method="post">
             <div>
                 <label for="email">E-mail</label>
