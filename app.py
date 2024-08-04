@@ -9,6 +9,10 @@ app.config['SECRET_KEY'] = 'chave secreta projeto PSI'
 def index():
    return render_template('paginainicial.html')
 
+@app.route('/inicio')
+def carregarLandingPage():
+   return render_template('base_landingpage.html')
+
 
 @app.route('/<valor>')
 def paginainicial(valor):
@@ -24,7 +28,7 @@ def validarsignin():
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
 
-   if senhaUser != '' and confirmarsenha != '' and emailUser != '':
+   if len(emailUser) != 0 and len(senhaUser) != 0 and len(confirmarsenha) != 0:
       if senhaUser == confirmarsenha:
          return redirect('/autenticar')
       else:
@@ -32,7 +36,7 @@ def validarsignin():
          return redirect('/cadastrar')
    else:
       flash('Todos os campos devem ser preenchidos!')
-      return redirect('/cadastrar')
+      return redirect('cadastrar')
       
 
 
@@ -41,17 +45,17 @@ def verificarlogin():
    email = request.form['email']
    senha = request.form['senha']
 
-   if senha != '' and email != '':
-      if email == 'danilo' and senha == '123':
-         return render_template('base_landingpage.html')
-      elif email != 'danilo' and senha != '123':
-         flash('Dados incorretos!')
-         return redirect('/autenticar')
-      elif email == 'danilo' and senha != '123':
+   if len(email) != 0 and len(senha) != 0:
+      if email == 'admin' and senha == '123':
+         return redirect('/inicio')
+      elif email == 'admin' and senha != '123':
          flash('Senha incorreta!')
+         return redirect('/autenticar') 
+      elif email != 'admin' and senha == '123':
+         flash('Dados inválidos')
          return redirect('/autenticar')
-      elif email != 'danilo' and senha == '123':
-         flash('E-mail incorreto')
+      else:
+         flash('Dados inválidos')
          return redirect('/autenticar')
    else:
       flash('Todos os campos devem ser preenchidos!')
