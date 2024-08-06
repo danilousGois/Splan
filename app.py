@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
 from flask import flash, redirect
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chave secreta projeto PSI'
-
+arquivo =  open('static/usuarios.json')
+usuarios = json.load(arquivo)
 
 @app.route('/')
 def index():
@@ -19,17 +21,21 @@ def paginainicial(valor):
    if valor == 'autenticar':
       return render_template('login.html')
    else:
-      return render_template('signin.html')
+      return render_template('signup.html')
 
 
 @app.route('/cadastrar', methods=['POST'])
-def validarsignin():
+def validarsignup():
    emailUser = request.form['email']
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
+   dados_login = {}
+
 
    if len(emailUser) != 0 and len(senhaUser) != 0 and len(confirmarsenha) != 0:
       if senhaUser == confirmarsenha:
+         dados_login = {'email': emailUser, 'senha':senhaUser}
+         
          return redirect('/autenticar')
       else:
          flash('Senha e confirmação devem ser iguais!')
