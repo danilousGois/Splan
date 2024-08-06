@@ -4,8 +4,7 @@ import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chave secreta projeto PSI'
-# arquivo =  open('static/usuarios.json')
-# usuarios = json.load(arquivo)
+
 
 @app.route('/')
 def index():
@@ -29,17 +28,17 @@ def validarsignup():
    emailUser = request.form['email']
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
+   dados_user = json.load('static/dados_usuario.json')
    
-
 
    if len(emailUser) != 0 and len(senhaUser) != 0 and len(confirmarsenha) != 0:
       if senhaUser == confirmarsenha:
-         dados_user = {'email': emailUser, 'senha': senhaUser}
-         with open('static/dados_usuario.json', 'w') as json_file:
+         user = {'email': emailUser, 'senha': senhaUser}
+         dados_user.update(user)
+         
+         with open('static/dados_usuario.json', 'a') as json_file:
             json.dump(dados_user, json_file, indent=4)
-         
-         
-         return redirect('/autenticar')
+            return redirect('/autenticar')
       else:
          flash('Senha e confirmação devem ser iguais!')
          return redirect('/cadastrar')
@@ -53,7 +52,7 @@ def validarsignup():
 def verificarlogin():
    email = request.form['email']
    senha = request.form['senha']
-   with open('static/', 'r') as json_file:
+   with open('static/dados_usuario.json', 'r') as json_file:
       dados_user = json.load(json_file)
       print(dados_user)
 
