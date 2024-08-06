@@ -4,8 +4,8 @@ import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chave secreta projeto PSI'
-arquivo =  open('static/usuarios.json')
-usuarios = json.load(arquivo)
+# arquivo =  open('static/usuarios.json')
+# usuarios = json.load(arquivo)
 
 @app.route('/')
 def index():
@@ -29,12 +29,15 @@ def validarsignup():
    emailUser = request.form['email']
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
-   dados_login = {}
+   
 
 
    if len(emailUser) != 0 and len(senhaUser) != 0 and len(confirmarsenha) != 0:
       if senhaUser == confirmarsenha:
-         dados_login = {'email': emailUser, 'senha':senhaUser}
+         dados_user = {'email': emailUser, 'senha': senhaUser}
+         with open('static/dados_usuario.json', 'w') as json_file:
+            json.dump(dados_user, json_file, indent=4)
+         
          
          return redirect('/autenticar')
       else:
@@ -50,6 +53,9 @@ def validarsignup():
 def verificarlogin():
    email = request.form['email']
    senha = request.form['senha']
+   with open('static/', 'r') as json_file:
+      dados_user = json.load(json_file)
+      print(dados_user)
 
    if len(email) != 0 and len(senha) != 0:
       if email == 'admin' and senha == '123':
@@ -66,7 +72,6 @@ def verificarlogin():
    else:
       flash('Todos os campos devem ser preenchidos!')
       return redirect('/autenticar')
-
 
 
 @app.route('/inicio/<materia>')
@@ -112,4 +117,4 @@ def carregarmateria(materia):
 
 
 if __name__ == "__main__":
-    app.run
+    app.run(debug=True)
