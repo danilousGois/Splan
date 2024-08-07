@@ -28,23 +28,26 @@ def validarsignup():
    emailUser = request.form['email']
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
-   dados_user = json.load('static/dados_usuario.json')
+   dados_user = json.load(open('static/dados_usuario.json'))
    
 
-   if len(emailUser) != 0 and len(senhaUser) != 0 and len(confirmarsenha) != 0:
+   if emailUser and senhaUser and confirmarsenha:
       if senhaUser == confirmarsenha:
-         user = {'email': emailUser, 'senha': senhaUser}
-         dados_user.update(user)
-         
-         with open('static/dados_usuario.json', 'a') as json_file:
-            json.dump(dados_user, json_file, indent=4)
+         if emailUser == dados_user.get('email') or emailUser == "admin" and senhaUser == "123":
+            flash("email já cadastrado, faça login!")
             return redirect('/autenticar')
+         else:   
+            user = {'email': emailUser, 'senha': senhaUser}
+            dados_user.update(user)
+            with open('static/dados_usuario.json', 'a') as json_file:
+               json.dump(dados_user, json_file, indent=4)
+               return redirect('/autenticar')
       else:
          flash('Senha e confirmação devem ser iguais!')
          return redirect('/cadastrar')
    else:
       flash('Todos os campos devem ser preenchidos!')
-      return redirect('cadastrar')
+      return redirect('/cadastrar')
       
 
 
@@ -54,24 +57,17 @@ def verificarlogin():
    senha = request.form['senha']
    with open('static/dados_usuario.json', 'r') as json_file:
       dados_user = json.load(json_file)
-      print(dados_user)
 
-   if len(email) != 0 and len(senha) != 0:
+   if email and senha:
       if email == 'admin' and senha == '123':
          return redirect('/inicio')
-      elif email == 'admin' and senha != '123':
-         flash('Senha incorreta!')
-         return redirect('/autenticar') 
-      elif email != 'admin' and senha == '123':
-         flash('Dados inválidos')
-         return redirect('/autenticar')
+      elif email == dados_user.get('email') and senha == dados_user.get('senha'):
+         return redirect('/inicio')
       else:
          flash('Dados inválidos')
-         return redirect('/autenticar')
    else:
       flash('Todos os campos devem ser preenchidos!')
-      return redirect('/autenticar')
-
+   return redirect('/autenticar')
 
 @app.route('/inicio/<materia>')
 def carregarmateria(materia):
