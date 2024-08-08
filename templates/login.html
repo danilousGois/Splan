@@ -12,6 +12,7 @@
             <p>
                 {% for msg in mensagens %}
                     {{msg}}
+                    {% mensagens.clear() %}
                 {% endfor %}
             </p>
         {% endif %}
