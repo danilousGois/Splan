@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
 </head>
 <body>
     <div>
-        {% set mensagens = get_flashed_messages() %}
-        {% if mensagens %}
-            <p>
-                {% for msg in mensagens %}
-                    {{msg}}
-                    {% mensagens.clear() %}
-                {% endfor %}
-            </p>
-        {% endif %}
-        <form action="{{url_for('verificarlogin')}}" method="post">
+        {% with mensagens = get_flashed_messages() %}
+            {% if mensagens %}
+                <div>
+                    {% for msg in mensagens %}
+                        <p>{{ msg }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('verificarlogin') }}" method="post">
             <div>
                 <label for="email">E-mail</label>
-                <input type="text" name="email" id="" placeholder="E-mail">
+                <input type="text" name="email" placeholder="E-mail">
             </div>
             <div>
                 <label for="senha">Senha</label>
-                <input type="password" name="senha" id="" placeholder="Senha">
+                <input type="password" name="senha" placeholder="Senha">
             </div>
             <button type="submit">Fazer login</button>
         </form>

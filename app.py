@@ -1,23 +1,43 @@
 from flask import Flask, render_template, request
-from flask import flash, redirect
+from flask import flash, redirect, make_response
 import json
+import os
+import uuid
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chave secreta projeto PSI'
 
+def veri_user_loged():
+   ID_Usuario = request.cookies.get('ID_Usuario')
+
+   if ID_Usuario == None:
+      return False
+   if os.path.exists('static/dados_usuario.json'):
+      with open('static/dados_usuario.json', 'r') as json_file:
+         lista_usuarios = json.load(json_file)
+         for lista_dict in lista_usuarios:
+               if lista_dict.get('ID_Usuario') == ID_Usuario:
+                  return True
+   return False
 
 @app.route('/')
 def index():
+   if veri_user_loged() == True:
+      return redirect('/inicio')
    return render_template('paginainicial.html')
 
 @app.route('/inicio')
 def carregarLandingPage():
+   if veri_user_loged() == False:
+      return redirect('/autenticar')
    return render_template('base_landingpage.html')
 
 
 @app.route('/<valor>')
 def paginainicial(valor):
-   if valor == 'autenticar':
+   if veri_user_loged() == True:
+      return redirect('/inicio')
+   elif valor == 'autenticar':
       return render_template('login.html')
    else:
       return render_template('signup.html')
@@ -28,43 +48,71 @@ def validarsignup():
    emailUser = request.form['email']
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
-   dados_user = json.load(open('static/dados_usuario.json'))
-   
+   ID_Usuario = str(uuid.uuid4())
 
    if emailUser and senhaUser and confirmarsenha:
       if senhaUser == confirmarsenha:
-         if emailUser == dados_user.get('email') or emailUser == "admin" and senhaUser == "123":
-            flash("email já cadastrado, faça login!")
-            return redirect('/autenticar')
-         else:   
-            user = {'email': emailUser, 'senha': senhaUser}
-            dados_user.update(user)
-            with open('static/dados_usuario.json', 'a') as json_file:
-               json.dump(dados_user, json_file, indent=4)
-               return redirect('/autenticar')
+         if os.path.exists('static/dados_usuario.json'):
+            with open('static/dados_usuario.json', 'r') as json_file:
+               lista_usuarios = json.load(json_file)
+               for lista_dict in lista_usuarios:
+                  for chave, valor in lista_dict.items():
+                     if emailUser in valor:
+                        flash('E-mail já cadastrado, faça login!!')
+                        return redirect('/autenticar')
+         else:
+            lista_usuarios = []  
+
+         dados_user = {
+            "ID_Usuario": ID_Usuario,
+            "email": emailUser,
+            "senha": senhaUser
+         }
+         lista_usuarios.append(dados_user)
+         with open('static/dados_usuario.json', 'w') as json_file:
+            json.dump(lista_usuarios, json_file, indent=4)
+
+         resp = make_response(redirect('/inicio'))
+         resp.set_cookie('ID_Usuario', ID_Usuario)
+         return resp
       else:
          flash('Senha e confirmação devem ser iguais!')
-         return redirect('/cadastrar')
    else:
       flash('Todos os campos devem ser preenchidos!')
-      return redirect('/cadastrar')
-      
+   return redirect('/cadastrar')
 
 
 @app.route('/autenticar', methods=['POST'])
 def verificarlogin():
    email = request.form['email']
    senha = request.form['senha']
+   Ver_email = False
+   Ver_senha = False
    with open('static/dados_usuario.json', 'r') as json_file:
-      dados_user = json.load(json_file)
+      lista_usuarios = json.load(json_file)
 
    if email and senha:
-      if email == 'admin' and senha == '123':
-         return redirect('/inicio')
-      elif email == dados_user.get('email') and senha == dados_user.get('senha'):
-         return redirect('/inicio')
+      for lista_dict in lista_usuarios:
+         for chave, valor in lista_dict.items():
+            if email in valor:
+               Ver_email = True
+            if senha in valor:
+               Ver_senha = True
+      if Ver_email == True and Ver_senha == True:
+         ID_Usuario = str(uuid.uuid4())
+         resp = make_response(redirect('/inicio'))
+         resp.set_cookie('ID_Usuario', ID_Usuario)
+         with open('static/dados_usuario.json', 'r') as json_file:
+               lista_usuarios = json.load(json_file)
+         for lista_dict in lista_usuarios:
+            if lista_dict.get('email') == email:
+               lista_dict['ID_Usuario'] = ID_Usuario
+         with open('static/dados_usuario.json', 'w') as json_file:
+            json.dump(lista_usuarios, json_file, indent=4)
+         return resp
       else:
-         flash('Dados inválidos')
+         flash('Esse usuário não existe!!')
+      return redirect('/cadastrar')
    else:
       flash('Todos os campos devem ser preenchidos!')
    return redirect('/autenticar')
@@ -109,7 +157,11 @@ def carregarmateria(materia):
 
    return render_template('carregarmaterias.html', materia=materias[materia])
 
-
+@app.route('/logout')
+def logout():
+    resp = make_response(redirect('/autenticar'))
+    resp.delete_cookie('ID_Usuario')
+    return resp
 
 if __name__ == "__main__":
     app.run(debug=True)

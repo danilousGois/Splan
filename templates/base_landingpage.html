@@ -17,6 +17,7 @@
         <li><a href="{{url_for('carregarmateria', materia='Geografia')}}">Geografia</a></li>
         <li><a href="{{url_for('carregarmateria', materia='Filosofia')}}">Filosofia</a></li>
     </ul>
+    <a href="{{ url_for('logout') }}">Sair</a>
     {% block conteudo %}
     {% endblock %}
    </section>
