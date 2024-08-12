@@ -4,22 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/static/css/estilo.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-   <section>
-    <ul>
-        <li><a href="{{url_for('carregarmateria', materia='Matemática')}}">Matemática</a></li>
-        <li><a href="{{url_for('carregarmateria', materia='Física')}}">Física</a></li>
-        <li><a href="{{url_for('carregarmateria', materia='Química')}}">Química</a></li>
-        <li><a href="{{url_for('carregarmateria', materia='Português')}}">Português</a></li>
-        <li><a href="{{url_for('carregarmateria', materia='Biologia')}}">Biologia</a></li>
-        <li><a href="{{url_for('carregarmateria', materia='História')}}">História</a></li>
-        <li><a href="{{url_for('carregarmateria', materia='Geografia')}}">Geografia</a></li>
-        <li><a href="{{url_for('carregarmateria', materia='Filosofia')}}">Filosofia</a></li>
-    </ul>
-    <a href="{{ url_for('logout') }}">Sair</a>
-    {% block conteudo %}
-    {% endblock %}
-   </section>
+    <div class="d-flex">
+        <div class="sidebar d-flex flex-column p-3 bg-teal">
+            <a href="#" class="text-black mb-3">Primeiro Nome</a>
+            <a href="#" class="text-black mb-3">Cronograma</a>
+            <a href="#materiasSubmenu" class="text-black mb-3" data-bs-toggle="collapse" aria-expanded="false">Matérias</a>
+            <ul class="collapse lista__materias" id="materiasSubmenu">
+                <li><a href="{{url_for('carregarmateria', materia='Matemática')}}" class="text-black">Matemática</a></li>
+                <li><a href="{{url_for('carregarmateria', materia='Física')}}" class="text-black">Física</a></li>
+                <li><a href="{{url_for('carregarmateria', materia='Química')}}" class="text-black">Química</a></li>
+                <li><a href="{{url_for('carregarmateria', materia='Português')}}" class="text-black">Português</a></li>
+                <li><a href="{{url_for('carregarmateria', materia='Biologia')}}" class="text-black">Biologia</a></li>
+                <li><a href="{{url_for('carregarmateria', materia='História')}}" class="text-black">História</a></li>
+                <li><a href="{{url_for('carregarmateria', materia='Geografia')}}" class="text-black">Geografia</a></li>
+                <li><a href="{{url_for('carregarmateria', materia='Filosofia')}}" class="text-black">Filosofia</a></li>
+            </ul>
+            <a href="#" class="text-danger mt-auto">Sair</a>
+        </div>
+        <div class="background_deskboard content flex-grow-1 p-3">
+            <section class="deskboard__cronograma">
+                {% block conteudo %}
+                {% endblock %}
+            </section>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

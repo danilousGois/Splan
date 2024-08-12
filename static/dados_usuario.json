@@ -1,7 +1,12 @@
 [
     {
-        "ID_Usuario": "b222a546-3717-4a74-b2c7-4e4b57e4217b",
+        "ID_Usuario": "95334b75-1d7a-4035-baeb-c33525851df2",
         "email": "Glaucovascomcelos7@gmail.com",
+        "senha": "123"
+    },
+    {
+        "ID_Usuario": "55ab44a5-e91f-4f3f-aac4-254956446928",
+        "email": "glauco@gmail.com",
         "senha": "123"
     }
 ]

@@ -1,7 +1,15 @@
-img {
-    width: 400px;
-    height: 400px;
-    padding: 16px;
+html, body{
+    height: 100%;
+}
 
-    border-radius: 50%;
+.d-flex{
+    height: 100%;
+}
+
+.background_deskboard{
+    background-color: #0E9094;
+}
+
+li > a{
+    text-decoration: none;
 }
