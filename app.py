@@ -167,9 +167,9 @@ def carregarmateria(materia):
 
 @app.route('/logout')
 def logout():
-    resp = make_response(redirect('/autenticar'))
-    resp.delete_cookie('ID_Usuario')
-    return resp
+   resp = make_response(redirect('/autenticar'))
+   resp.delete_cookie('ID_Usuario')
+   return resp
 
 if __name__ == "__main__":
-    app.run(debug=True)
+   app.run(debug=True)
