@@ -1,65 +1,122 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Rammetto+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
 }
 
-html, body{
+html,
+body {
     height: 100%;
     width: 100%;
 }
 
 /*Style Login*/
 
-.body-login{
+.body-login {
     background-image: url(../img/bg-login.svg);
     background-size: cover;
     background-position: center center;
     background-color: #0E9094;
 }
 
-.form-login{
+.form-login {
     padding: 88px;
-    box-shadow: 10px 10px 50px 25px rgba(0,0,0,0.25);
+    box-shadow: 10px 10px 50px 25px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     background-color: #F5F5F5;
 }
 
-.form-login h1{
+.form-login h1 {
     margin-bottom: 2rem;
 }
 
-.form-login i{
+.form-login i,
+.form-sign-up i {
     font-size: 1.5rem;
     color: #0E9094;
 }
 
-.div_input{
-    border: 3px solid  #0E9094;
+.div_input {
+    border: 3px solid #0E9094;
     border-radius: 30px;
 }
 
-.div_input input{
+.div_input input {
     font-size: 1.3rem;
     padding: 0;
 }
 
-.div_input .form-control:focus{
+.div_input .form-control:focus {
     box-shadow: none;
 }
 
-.form-login button{
+.form-login button,
+.btn_cadastro {
     background-color: #0E9094;
     color: #F5F5F5;
 }
 
-.background_deskboard{
+/*Estilos de Sing Up*/
+
+.singup{
+    width: 35%;
+}
+
+.singup::after{
+    content: ' ';
+    height: 200px;
+    width: 200px;
+    background-image: url(../img/graduation-2.svg);
+    background-size: cover;
+    position: absolute;
+    left: 75%;
+    top: 50%;
+}
+
+.body-sign-up {
+    background-image: url(../img/bg-singup.svg);
+    background-size: auto auto;
+    background-repeat: no-repeat;
+    background-position: -5px center;
     background-color: #0E9094;
 }
 
-li > a{
+.content-singup h1 {
+    margin-bottom: 0;
+}
+
+.btn_cadastro {
+    width: max-content;
+}
+
+.form-sign-up {
+    max-width: 405px;
+}
+
+.span-text {
+    left: 60%;
+    top: 20%;
+    color: #F5F5F5;
+}
+
+.span-text h2{
+    font-size: 4rem;
+    font-family: "Rammetto One", sans-serif;
+}
+
+.span-text p{
+    font-family: "Inknut Antiqua", serif;
+    font-size: 2rem;
+
+}
+
+.background_deskboard {
+    background-color: #0E9094;
+}
+
+li>a {
     text-decoration: none;
 }
