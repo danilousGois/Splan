@@ -13,6 +13,11 @@ body {
     width: 100%;
 }
 
+/*Style Landing Page*/
+.deskboard_landingpage{
+    height: 100%;
+}
+
 /*Style Login*/
 
 .body-login {
