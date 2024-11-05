@@ -126,13 +126,25 @@ li>a {
     text-decoration: none;
 }
 
-header ul{
+ul{
     list-style: none;
 }
 header ul a{
     color: #000;
 }
 
-.acesso li:first-child a{
+.acesso li a{
     border-radius: 16px;
+}
+.acesso li:nth-child(2) a{
+    border-radius: 16px;
+    background-color: #0E9094;
+}
+
+.splan-hero h1{
+    font-size: 4rem;
+}
+
+.splan-hero{
+    padding: 7.5rem 0;
 }
