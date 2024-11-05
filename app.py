@@ -14,16 +14,7 @@ def carregar_materias():
    return {}
 
 def verificar_user_logado():
-   ID_Usuario = request.cookies.get('ID_Usuario')
-   if ID_Usuario == None:
-      return False
-   if os.path.exists('static/dados_usuario.json'):
-      with open('static/dados_usuario.json', 'r') as json_file:
-         lista_usuarios = json.load(json_file)
-         for lista_dict in lista_usuarios:
-               if lista_dict.get('ID_Usuario') == ID_Usuario:
-                  return True
-   return False
+    return 'ID_Usuario' in session
 
 @app.route('/')
 def index():
@@ -33,7 +24,7 @@ def index():
 
 @app.route('/inicio')
 def carregarLandingPage():
-   if 'ID_Usuario' not in session:
+   if verificar_user_logado() == False:
       return redirect('/autenticar')
    nomeuser = session['nomeuser']
    return render_template('base_landingpage.html', nomeuser = nomeuser)
@@ -134,8 +125,8 @@ def carregarmateria(materia):
 
 @app.route('/logout')
 def logout():
+   session.clear()
    resp = make_response(redirect('/autenticar'))
-   resp.delete_cookie('ID_Usuario')
    return resp
 
 

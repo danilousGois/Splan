@@ -1,1 +1,8 @@
-[]
+[
+    {
+        "ID_Usuario": "2b215dc0-87bb-4f2b-8575-46aa67f068d2",
+        "nomeuser": "danilo",
+        "email": "danilo@gmail.com",
+        "senha": "123"
+    }
+]
