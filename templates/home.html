@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/Header-splan.svg') }}" type="image/svg">
     <title>Splan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body>
     <header class="p-4">
         <div class="container d-flex justify-content-between align-items-center">
@@ -23,12 +27,14 @@
                 </nav>
             </ul>
             <ul>
-                <nav class="d-flex gap-5 acesso">
+                <nav class="d-flex gap-4 acesso">
                     <li>
-                        <a href="{{url_for('paginainicial', valor='autenticar')}}" class="border-secondary p-3 border fw-bold">Entrar</a>
+                        <a href="{{url_for('paginainicial', valor='autenticar')}}"
+                            class="border-secondary p-3 border fw-bold fs-6">Entrar</a>
                     </li>
                     <li>
-                        <a href="{{url_for('paginainicial', valor='cadastrar')}}" class="text-white p-3 fw-bold">Signup</a>
+                        <a href="{{url_for('paginainicial', valor='cadastrar')}}"
+                            class="text-white p-3 fw-bold fs-6">Signup</a>
                     </li>
                 </nav>
             </ul>
@@ -43,10 +49,12 @@
                         <div class="splan-hero-box-buttons acesso">
                             <ul class="d-flex gap-3 ps-0">
                                 <li>
-                                    <a href="{{url_for('paginainicial', valor='autenticar')}}" class="border-secondary p-3 px-5 border fw-bold text-body">Entrar</a>
+                                    <a href="{{url_for('paginainicial', valor='autenticar')}}"
+                                        class="border-secondary p-3 px-5 border fw-bold text-body fs-4">Entrar</a>
                                 </li>
                                 <li>
-                                    <a href="{{url_for('paginainicial', valor='cadastrar')}}" class="text-white p-3 px-5 fw-bold">Signup</a>
+                                    <a href="{{url_for('paginainicial', valor='cadastrar')}}"
+                                        class="text-white p-3 px-5 fw-bold fs-4">Signup</a>
                                 </li>
                             </ul>
                         </div>
@@ -57,7 +65,53 @@
                 </div>
             </div>
         </section>
+        <section class="splan-operation">
+            <div class="container">
+                <div class="content-splan-hero text-center">
+                    <h2 class="mb-5 fs-1 position-relative">Funcionamento</h2>
+                    <p class="fs-4">Por meio do formulário que coletará dados de que matérias o usuário quer estudar,
+                        que possui maior domínio e da quantidade de horas disponíveis que ele tem para estudar,
+                        montaremos um plano de estudos dando pesos proporcionais às matérias de maior e menor prioridade
+                        e dividiremos o tempo disponível para estudo de acordo com esses pesos.</p>
+                </div>
+                <div class="box-function d-flex justify-content-between">
+                    <div class="function d-flex flex-column align-items-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='img/img1-funcionamento.png') }}"
+                                alt="funcionalidade 1">
+                        </figure>
+                        <figcaption class="fs-4 fw-bold">
+                            Formulário Levantativo
+                        </figcaption>
+                    </div>
+                    <div class="function d-flex flex-column align-items-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='img/img2-funcionamento.png') }}"
+                                alt="funcionalidade 2">
+                        </figure>
+                        <figcaption class="fs-4 fw-bold">
+                            Matérias Organizadas
+                        </figcaption>
+                    </div>
+                    <div class="function d-flex flex-column align-items-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='img/img3-funcionamento.png') }}"
+                                alt="funcionalidade 3">
+                        </figure>
+                        <figcaption class="fs-4 fw-bold">
+                            Cronograma
+                        </figcaption>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="splan-we-go">
+
+        </section>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
