@@ -194,3 +194,21 @@ footer .devs{
 footer p{
     max-width: 310px;
 }
+
+/*deskboard_landingpage*/
+
+.sidebar{
+    padding: 2rem 1.25rem;
+}
+
+.content-sidebar{
+    opacity: 0;
+    width: 0px;
+    transition: all .5s;
+}
+
+.sidebar:hover .content-sidebar{
+    opacity: 1;
+    width: auto;
+    transition: all 1s;
+}

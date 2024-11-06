@@ -1,13 +1,8 @@
 [
     {
-<<<<<<< HEAD
-        "ID_Usuario": "2b215dc0-87bb-4f2b-8575-46aa67f068d2",
-        "nomeuser": "danilo",
+        "ID_Usuario": "00a601ab-2559-4ee2-9e88-a4df295ae654",
+        "nomeuser": "Danilo",
         "email": "danilo@gmail.com",
-=======
-        "ID_Usuario": "1a688905-fbd7-4bb2-808b-3f332f03edfd",
-        "email": "email@gmail.com",
->>>>>>> filipi
-        "senha": "123"
+        "senha": "12345"
     }
 ]
