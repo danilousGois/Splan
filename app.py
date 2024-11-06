@@ -30,7 +30,13 @@ def index():
 def carregarLandingPage():
    if verificar_user_logado() == False:
       return redirect('/autenticar')
-   return render_template('base_landingpage.html')
+   ID_Usuario = request.cookies.get('ID_Usuario')
+   with open('static/dados_usuario.json', 'r') as json_file:
+      lista_usuarios = json.load(json_file)
+      for lista_dict in lista_usuarios:
+         if lista_dict.get('ID_Usuario') == ID_Usuario:
+            nome=nome = lista_dict.get('nome')
+   return render_template('base_landingpage.html', nome=nome)
 
 
 @app.route('/<valor>')
@@ -47,6 +53,7 @@ def paginainicial(valor):
 def validarsignup():
    emailUser = request.form['email']
    senhaUser = request.form['senha']
+   nomeUser = request.form['nome']
    confirmarsenha = request.form['confirmarsenha']
    ID_Usuario = str(uuid.uuid4())
 
@@ -67,6 +74,7 @@ def validarsignup():
          dados_user = {
             "ID_Usuario": ID_Usuario,
             "email": emailUser,
+            "nome": nomeUser,
             "senha": senhaUser
          }
          
@@ -125,6 +133,7 @@ def verificarlogin():
       flash('Todos os campos devem ser preenchidos!', "warning")
    return redirect('/autenticar')
 
+
 @app.route('/inicio/<materia>')
 def carregarmateria(materia):
 
@@ -162,8 +171,11 @@ def carregarmateria(materia):
          'conteudos': ['filósofos pré-socráticos', 'filosofia antropocêntrica', 'ética e moral']
       }
    }
-
-   return render_template('carregarmaterias.html', materia=materias[materia])
+   
+   if(materia in materias):
+      return render_template('carregarmaterias.html', materia=materias[materia])
+   else:
+      return '404 error'
 
 @app.route('/logout')
 def logout():

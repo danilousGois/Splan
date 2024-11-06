@@ -1,7 +1,8 @@
 [
     {
-        "ID_Usuario": "1a688905-fbd7-4bb2-808b-3f332f03edfd",
-        "email": "email@gmail.com",
+        "ID_Usuario": "6ba87f53-1871-4c97-860b-bc392196474a",
+        "email": "email@email.com",
+        "nome": "admin",
         "senha": "123"
     }
 ]

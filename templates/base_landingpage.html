@@ -8,25 +8,65 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="d-flex deskboard_landingpage">
-        <div class="sidebar d-flex flex-column p-3 bg-teal">
-            <a href="#" class="text-black mb-3">Primeiro Nome</a>
-            <a href="#" class="text-black mb-3">Cronograma</a>
-            <a href="#materiasSubmenu" class="text-black mb-3" data-bs-toggle="collapse" aria-expanded="false">Matérias</a>
-            <ul class="collapse lista__materias" id="materiasSubmenu">
-                <li><a href="{{url_for('carregarmateria', materia='Matemática')}}" class="text-black">Matemática</a></li>
-                <li><a href="{{url_for('carregarmateria', materia='Física')}}" class="text-black">Física</a></li>
-                <li><a href="{{url_for('carregarmateria', materia='Química')}}" class="text-black">Química</a></li>
-                <li><a href="{{url_for('carregarmateria', materia='Português')}}" class="text-black">Português</a></li>
-                <li><a href="{{url_for('carregarmateria', materia='Biologia')}}" class="text-black">Biologia</a></li>
-                <li><a href="{{url_for('carregarmateria', materia='História')}}" class="text-black">História</a></li>
-                <li><a href="{{url_for('carregarmateria', materia='Geografia')}}" class="text-black">Geografia</a></li>
-                <li><a href="{{url_for('carregarmateria', materia='Filosofia')}}" class="text-black">Filosofia</a></li>
-            </ul>
-            <a href="{{url_for('logout')}}" class="text-danger mt-auto">Sair</a>
-        </div>
+        <aside class="sidebar d-flex bg-teal d-flex gap-3 align-items-center">
+            <div class="content-sidebar d-flex flex-column gap-4 align-self-start">
+                <div class="user-info border-bottom pb-4 d-flex align-items-center gap-3 border-dark-subtle">
+                    <img src="{{ url_for('static', filename='img/user.svg') }}" alt=""> 
+                    <span>
+                        {{nome}}
+                    </span>
+                </div>
+                <div class="funcionalidade d-flex align-items-center gap-3">
+                    <img src="{{ url_for('static', filename='img/icon_clock_.svg') }}" alt="">
+                    <span class="name_funcionalidade">
+                        Cronograma
+                    </span>
+                </div>
+                <div class="funcionalidade d-flex align-items-center gap-3">
+                    <img src="{{ url_for('static', filename='img/icon-materias.svg') }}" alt="">
+                    <span class="name_funcionalidade">
+                        <a href="#materiasSubmenu" class="text-black mb-3 text-decoration-none" data-bs-toggle="collapse" aria-expanded="false">Matérias</a>
+                    </span>
+                    <ul class="collapse lista__materias" id="materiasSubmenu">
+                        <li><a href="{{url_for('carregarmateria', materia='Matemática')}}" class="text-black">Matemática</a></li>
+                        <li><a href="{{url_for('carregarmateria', materia='Física')}}" class="text-black">Física</a></li>
+                        <li><a href="{{url_for('carregarmateria', materia='Química')}}" class="text-black">Química</a></li>
+                        <li><a href="{{url_for('carregarmateria', materia='Português')}}" class="text-black">Português</a></li>
+                        <li><a href="{{url_for('carregarmateria', materia='Biologia')}}" class="text-black">Biologia</a></li>
+                        <li><a href="{{url_for('carregarmateria', materia='História')}}" class="text-black">História</a></li>
+                        <li><a href="{{url_for('carregarmateria', materia='Geografia')}}" class="text-black">Geografia</a></li>
+                        <li><a href="{{url_for('carregarmateria', materia='Filosofia')}}" class="text-black">Filosofia</a></li>
+                    </ul>
+                </div>
+                <div class="funcionalidade d-flex align-items-center gap-3">
+                    <img src="{{ url_for('static', filename='img/grafico-icon.svg') }}" alt="">
+                    <span class="name_funcionalidade">
+                        Gráfico
+                    </span>
+                </div>
+                <div class="funcionalidade d-flex align-items-center gap-3">
+                    <img src="{{ url_for('static', filename='img/revisao-icon.svg') }}" alt="">
+                    <span class="name_funcionalidade">
+                        Revisão
+                    </span>
+                </div>
+                <div class="funcionalidade d-flex align-items-center gap-3">
+                    <img src="{{ url_for('static', filename='img/icon-search.svg') }}" alt="">
+                    <span class="name_funcionalidade">
+                        Pesquisa
+                    </span>
+                </div>
+                <a href="{{url_for('logout')}}" class="text-danger mt-auto align-items-end mt-auto d-inline-block"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sair</span></a>
+            </div>
+            <div class="icon-chevron">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </aside>
         <div class="background_deskboard content flex-grow-1 p-3">
             <section class="deskboard__cronograma">
                 {% block conteudo %}
