@@ -21,8 +21,8 @@
             </figure>
             <ul class="nav-mid">
                 <nav class="d-flex gap-5">
-                    <li><a href="">Funcionamento</a></li>
-                    <li><a href="">O que vamos fazer</a></li>
+                    <li><a href="#funcionamento">Funcionamento</a></li>
+                    <li><a href="#faremos">O que vamos fazer</a></li>
                     <li><a href="">O que esperamos</a></li>
                 </nav>
             </ul>
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </section>
-        <section class="splan-operation">
+        <section class="splan-operation" id="funcionamento">
             <div class="container">
                 <div class="content-splan-hero text-center">
                     <h2 class="mb-5 fs-1 position-relative">Funcionamento</h2>
@@ -105,8 +105,20 @@
                 </div>
             </div>
         </section>
-        <section class="splan-we-go">
-
+        <section class="splan-we-go" id="faremos">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <figure class="col-6 position-relative">
+                        <img src="{{ url_for('static', filename='img/img-we-go.png') }}" alt="imagem de menina estudando">
+                        <img src="{{ url_for('static', filename='img/bg-faremos.png') }}" alt="imagem de menina estudando" class="position-absolute">
+                    </figure>
+                    <article class="content-splan-we-go col-5 text-white">
+                        <h2 class="fs-1">O que vamos fazer</h2>
+                        <p class="fs-5">O nosso projeto busca solucionar o problema que grande parte dos estudantes enfrentam devido a falta de organização/planejamento de estudos. A ideia do projeto foi pensada por conta dessa experiência que pessoas próximas e até nós mesmo temos com relação ao planejamentos dos estudos. 
+                        </p>
+                    </article>
+                </div>
+            </div>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -165,5 +165,22 @@ section{
 }
 
 .content-splan-hero{
-    margin-bottom:64px;
+    margin-bottom:4rem;
+}
+
+.splan-we-go{
+    background-color: #0E9094;
+    padding: 7.5rem 0;
+}
+
+.splan-we-go figure{
+    z-index: 2;
+}
+
+.splan-we-go figure img:nth-child(2) {
+    left: -20px;
+    top: -170px;
+    height: 250%;
+    z-index: -1;
+    overflow: hidden;
 }
