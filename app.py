@@ -20,7 +20,7 @@ def verificar_user_logado():
 def index():
    if verificar_user_logado() == True:
       return redirect('/inicio')
-   return render_template('paginainicial.html')
+   return render_template('home.html')
 
 @app.route('/inicio')
 def carregarLandingPage():
