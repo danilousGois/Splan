@@ -4,5 +4,11 @@
         "nomeuser": "Danilo",
         "email": "danilo@gmail.com",
         "senha": "12345"
+    },
+    {
+        "ID_Usuario": "730c687b-e379-4c8f-ae0a-12595498cf4a",
+        "nomeuser": "Filipi",
+        "email": "filipi@gmail.com",
+        "senha": "123"
     }
 ]
