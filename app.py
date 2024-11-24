@@ -49,6 +49,10 @@ def paginainicial(valor):
    else:
       return render_template('signup.html')
 
+@app.route('/formulario')
+def formulario():
+   return render_template('formulario.html')
+
 
 @app.route('/cadastrar', methods=['POST'])
 def validarsignup():

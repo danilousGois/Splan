@@ -125,3 +125,105 @@ body {
 li>a {
     text-decoration: none;
 }
+
+
+
+/*Style Formulario do Cronograma*/
+
+.body-formulario_cronograma {
+    background-image: url(../img/bg-formulario.svg);
+    background-size: cover;
+    background-position: center center;
+    background-color: #F5F5F5;
+}
+
+.form-formulario_cronograma {
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 10px 10px 50px 25px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    background-color: #F5F5F5;
+    margin: auto;
+}
+
+.form-formulario_cronograma h1 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.form-formulario_cronograma i,
+.form-sign-up i {
+    font-size: 1.5rem;
+    color: #0E9094;
+}
+
+.form-control{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.form-label{
+    color: #3C3C3C;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.form-check-label{
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.div_input {
+    border: 3px solid #0E9094;
+    border-radius: 30px;
+}
+
+.div_input input {
+    font-size: 1.3rem;
+    padding: 0;
+}
+
+.div_input .form-control:focus {
+    box-shadow: none;
+}
+
+.form-formulario_cronograma button,
+.btn_cadastro {
+    background-color: #0E9094;
+    color: #F5F5F5;
+}
+
+@media (max-width: 768px) {
+    .form-formulario_cronograma {
+        padding: 20px;
+    }
+    .form-control {
+        font-size: 14px;
+    }
+    .form-label, .form-check-label {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-formulario_cronograma {
+        padding: 15px;
+    }
+    .form-formulario_cronograma h1 {
+        font-size: 1.2rem;
+    }
+    .form-control, .form-label, .form-check-label {
+        font-size: 12px;
+    }
+}
