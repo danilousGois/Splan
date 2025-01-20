@@ -27,11 +27,13 @@
                         Cronograma
                     </span>
                 </div>
-                <div class="funcionalidade d-flex align-items-center gap-3">
-                    <img src="{{ url_for('static', filename='img/icon-materias.svg') }}" alt="">
-                    <span class="name_funcionalidade">
-                        <a href="#materiasSubmenu" class="text-black mb-3 text-decoration-none" data-bs-toggle="collapse" aria-expanded="false">Matérias</a>
-                    </span>
+                <div class="funcionalidade d-flex flex-column gap-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="{{ url_for('static', filename='img/icon-materias.svg') }}" alt="">
+                        <span class="name_funcionalidade">
+                            <a href="#materiasSubmenu" class="text-black mb-3 text-decoration-none" data-bs-toggle="collapse" aria-expanded="false">Matérias</a>
+                        </span>
+                    </div>
                     <ul class="collapse lista__materias" id="materiasSubmenu">
                         <li><a href="{{url_for('carregarmateria', materia='Matemática')}}" class="text-black">Matemática</a></li>
                         <li><a href="{{url_for('carregarmateria', materia='Física')}}" class="text-black">Física</a></li>
