@@ -214,7 +214,7 @@ section {
 
 .bg-splan-our-project,
 footer,
-.splan-we-go{
+.splan-we-go {
     background-color: #0E9094;
 }
 
@@ -240,12 +240,13 @@ footer p {
 
 .content-sidebar {
     opacity: 0;
-    width: 0px;
-    transition: all .1s;
+    width: 0;
+    overflow: hidden;
+    transition: all 0.5s;
 }
 
 .sidebar:hover .content-sidebar {
     opacity: 1;
-    width: auto;
-    transition: all .1s;
+    width: 150px;
+    transition: all 0.5s;
 }
