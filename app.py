@@ -7,7 +7,7 @@ import uuid
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chave secreta projeto PSI'
 
-def veri_user_loged():
+def verificar_user_logado():
    ID_Usuario = request.cookies.get('ID_Usuario')
 
    if ID_Usuario == None:
@@ -22,20 +22,20 @@ def veri_user_loged():
 
 @app.route('/')
 def index():
-   if veri_user_loged() == True:
+   if verificar_user_logado() == True:
       return redirect('/inicio')
-   return render_template('paginainicial.html')
+   return render_template('home.html')
 
 @app.route('/inicio')
 def carregarLandingPage():
-   if veri_user_loged() == False:
+   if verificar_user_logado() == False:
       return redirect('/autenticar')
    return render_template('base_landingpage.html')
 
 
 @app.route('/<valor>')
 def paginainicial(valor):
-   if veri_user_loged() == True:
+   if verificar_user_logado() == True:
       return redirect('/inicio')
    elif valor == 'autenticar':
       return render_template('login.html')
@@ -55,11 +55,12 @@ def validarsignup():
          if os.path.exists('static/dados_usuario.json'):
             with open('static/dados_usuario.json', 'r') as json_file:
                lista_usuarios = json.load(json_file)
-               for lista_dict in lista_usuarios:
-                  for chave, valor in lista_dict.items():
-                     if emailUser in valor:
-                        flash('E-mail já cadastrado, faça login!!')
-                        return redirect('/autenticar')
+               
+            for lista_dict in lista_usuarios:
+               for chave, valor in lista_dict.items():
+                  if emailUser in valor:
+                     flash('E-mail já cadastrado, faça login!!', "primary")
+                     return redirect('/autenticar')
          else:
             lista_usuarios = []  
 
@@ -68,6 +69,7 @@ def validarsignup():
             "email": emailUser,
             "senha": senhaUser
          }
+         
          lista_usuarios.append(dados_user)
          with open('static/dados_usuario.json', 'w') as json_file:
             json.dump(lista_usuarios, json_file, indent=4)
@@ -76,10 +78,11 @@ def validarsignup():
          resp.set_cookie('ID_Usuario', ID_Usuario)
          return resp
       else:
-         flash('Senha e confirmação devem ser iguais!')
+         flash('Senha e confirmação devem ser iguais!', "warning")
+         return redirect('/cadastrar')
    else:
-      flash('Todos os campos devem ser preenchidos!')
-   return redirect('/cadastrar')
+      flash('Todos os campos devem ser preenchidos!', "warning")
+      return redirect('/cadastrar')
 
 
 @app.route('/autenticar', methods=['POST'])
@@ -100,21 +103,26 @@ def verificarlogin():
                Ver_senha = True
       if Ver_email == True and Ver_senha == True:
          ID_Usuario = str(uuid.uuid4())
+
          resp = make_response(redirect('/inicio'))
          resp.set_cookie('ID_Usuario', ID_Usuario)
+
          with open('static/dados_usuario.json', 'r') as json_file:
                lista_usuarios = json.load(json_file)
+
          for lista_dict in lista_usuarios:
             if lista_dict.get('email') == email:
                lista_dict['ID_Usuario'] = ID_Usuario
-         with open('static/dados_usuario.json', 'w') as json_file:
-            json.dump(lista_usuarios, json_file, indent=4)
-         return resp
+
+               with open('static/dados_usuario.json', 'w') as json_file:
+                  json.dump(lista_usuarios, json_file, indent=4)
+                  
+               return resp
       else:
-         flash('Esse usuário não existe!!')
+         flash('Esse usuário não existe! Faça o cadastro!', "danger")
       return redirect('/cadastrar')
    else:
-      flash('Todos os campos devem ser preenchidos!')
+      flash('Todos os campos devem ser preenchidos!', "warning")
    return redirect('/autenticar')
 
 @app.route('/inicio/<materia>')
@@ -159,9 +167,9 @@ def carregarmateria(materia):
 
 @app.route('/logout')
 def logout():
-    resp = make_response(redirect('/autenticar'))
-    resp.delete_cookie('ID_Usuario')
-    return resp
+   resp = make_response(redirect('/autenticar'))
+   resp.delete_cookie('ID_Usuario')
+   return resp
 
 if __name__ == "__main__":
-    app.run(debug=True)
+   app.run(debug=True)
