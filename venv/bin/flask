@@ -1,4 +1,4 @@
-#!/workspaces/PSI/venv/bin/python
+#!/workspaces/Splan/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
