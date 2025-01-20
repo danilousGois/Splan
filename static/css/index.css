@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Rammetto+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-* {
+
+
+body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif !important;
+    color: #3C3C3C !important;
+    line-height: normal;
 }
 
 html,
@@ -118,21 +122,93 @@ body {
 
 }
 
-.background_deskboard {
-    background-color: #0E9094;
-}
-
 li>a {
     text-decoration: none;
 }
 
-header ul{
+ul{
     list-style: none;
 }
 header ul a{
     color: #000;
 }
 
-.acesso li:first-child a{
+.acesso li a{
     border-radius: 16px;
+}
+.acesso li:nth-child(2) a{
+    border-radius: 16px;
+    background-color: #0E9094;
+}
+
+.splan-hero h1{
+    font-size: 4rem;
+}
+
+section{
+    padding: 7.5rem 0;
+    margin: 2rem 0;
+}
+
+.splan-operation h2::after{
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 50px;
+    background-color: #B7B3B3;
+    bottom:-20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.content-splan-hero{
+    margin-bottom:4rem;
+}
+
+.splan-we-go figure{
+    z-index: 2;
+}
+
+.splan-we-go figure img:nth-child(2) {
+    left: -100px;
+    top: -170px;
+    height: 250%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bg-splan-our-project,footer,.splan-we-go,.background_deskboard{
+    background-color: #0E9094;
+}
+
+.bg-splan-our-project p{
+    line-height: 175.9%;
+}
+
+footer .devs{
+    background-color: #3C3C3C;
+    border-radius: 25px;
+    padding: 0 2rem;
+}
+
+footer p{
+    max-width: 310px;
+}
+
+/*deskboard_landingpage*/
+
+.sidebar{
+    padding: 2rem 1.25rem;
+}
+
+.content-sidebar{
+    opacity: 0;
+    width: 0px;
+    transition: all .1s;
+}
+
+.sidebar:hover .content-sidebar{
+    opacity: 1;
+    width: auto;
+    transition: all .1s;
 }

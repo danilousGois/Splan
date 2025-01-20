@@ -1,15 +1,20 @@
-from flask import Flask, render_template, request
-from flask import flash, redirect, make_response
+from flask import Flask, render_template, request, flash, redirect, make_response, session
 import json
 import os
 import uuid
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'chave secreta projeto PSI'
+app.config['SECRET_KEY'] = 'chave_secreta_projeto_PSI'
+
+def carregar_materias():
+   if os.path.exists('static/materias.json'):
+      with open('static/materias.json', 'r') as json_file:
+         materias = json.load(json_file)
+      return materias
+   return {}
 
 def verificar_user_logado():
    ID_Usuario = request.cookies.get('ID_Usuario')
-
    if ID_Usuario == None:
       return False
    if os.path.exists('static/dados_usuario.json'):
@@ -28,9 +33,11 @@ def index():
 
 @app.route('/inicio')
 def carregarLandingPage():
-   if verificar_user_logado() == False:
+   if 'ID_Usuario' not in session:
       return redirect('/autenticar')
-   return render_template('base_landingpage.html')
+   nomeuser = session['nomeuser']
+   return render_template('base_landingpage.html', nome = nomeuser)
+
 
 
 @app.route('/<valor>')
@@ -45,6 +52,7 @@ def paginainicial(valor):
 
 @app.route('/cadastrar', methods=['POST'])
 def validarsignup():
+   nomeuser = request.form['nome']
    emailUser = request.form['email']
    senhaUser = request.form['senha']
    confirmarsenha = request.form['confirmarsenha']
@@ -55,28 +63,30 @@ def validarsignup():
          if os.path.exists('static/dados_usuario.json'):
             with open('static/dados_usuario.json', 'r') as json_file:
                lista_usuarios = json.load(json_file)
-               
             for lista_dict in lista_usuarios:
-               for chave, valor in lista_dict.items():
-                  if emailUser in valor:
-                     flash('E-mail já cadastrado, faça login!!', "primary")
-                     return redirect('/autenticar')
+               if emailUser == lista_dict['email']:
+                  flash('E-mail já cadastrado, faça login!', "primary")
+                  return redirect('/autenticar')
          else:
-            lista_usuarios = []  
+            lista_usuarios = []
 
          dados_user = {
             "ID_Usuario": ID_Usuario,
+            "nomeuser": nomeuser,
             "email": emailUser,
             "senha": senhaUser
          }
-         
+
          lista_usuarios.append(dados_user)
          with open('static/dados_usuario.json', 'w') as json_file:
             json.dump(lista_usuarios, json_file, indent=4)
 
-         resp = make_response(redirect('/inicio'))
-         resp.set_cookie('ID_Usuario', ID_Usuario)
-         return resp
+         session['ID_Usuario'] = ID_Usuario
+         session['nomeuser'] = nomeuser
+         session['email'] = emailUser     
+
+         return redirect('/inicio')
+      
       else:
          flash('Senha e confirmação devem ser iguais!', "warning")
          return redirect('/cadastrar')
@@ -96,80 +106,38 @@ def verificarlogin():
 
    if email and senha:
       for lista_dict in lista_usuarios:
-         for chave, valor in lista_dict.items():
-            if email in valor:
-               Ver_email = True
-            if senha in valor:
-               Ver_senha = True
-      if Ver_email == True and Ver_senha == True:
-         ID_Usuario = str(uuid.uuid4())
+         if email == lista_dict['email'] and senha == lista_dict['senha']:
+            Ver_email = True
+            Ver_senha = True
+            session['ID_Usuario'] = lista_dict['ID_Usuario']
+            session['nomeuser'] = lista_dict['nomeuser']
+            session['email'] = lista_dict['email']
+            return redirect('/inicio')
 
-         resp = make_response(redirect('/inicio'))
-         resp.set_cookie('ID_Usuario', ID_Usuario)
-
-         with open('static/dados_usuario.json', 'r') as json_file:
-               lista_usuarios = json.load(json_file)
-
-         for lista_dict in lista_usuarios:
-            if lista_dict.get('email') == email:
-               lista_dict['ID_Usuario'] = ID_Usuario
-
-               with open('static/dados_usuario.json', 'w') as json_file:
-                  json.dump(lista_usuarios, json_file, indent=4)
-                  
-               return resp
-      else:
-         flash('Esse usuário não existe! Faça o cadastro!', "danger")
-      return redirect('/cadastrar')
+      if not (Ver_email and Ver_senha):
+         flash('Esse usuário não existe! Faça o cadastro!')
+         return redirect('/cadastrar')
    else:
-      flash('Todos os campos devem ser preenchidos!', "warning")
-   return redirect('/autenticar')
+      flash('Todos os campos devem ser preenchidos!')
+      return redirect('/autenticar')
+
 
 @app.route('/inicio/<materia>')
 def carregarmateria(materia):
+   nomeuser = session['nomeuser']
+   materias = carregar_materias()
+   if materia in materias:
+      return render_template('carregarmaterias.html', materia=materias[materia], nome = nomeuser)
+   else:
+      return "Matéria não encontrada", 404
 
-   materias = {
-      'Matemática': {
-         'nome': 'matemática',
-         'conteudos': ['análise combinatória', 'funções', 'trigonometria', 'geometria', 'algebra', 'logaritmo', 'operações', 'sistemas lineares']
-      }, 
-      'Física': {
-         'nome': 'física',
-         'conteudos': ['dinâmica', 'eletrodinâmica', 'eletromagneteismo', 'óptica', 'calorimetria', 'ondulatória', 'vetores']
-      },
-      'Química': {
-         'nome': 'química',
-         'conteudos': ['reações químicas', 'química inorgânica', 'química orgânica', 'estequiometria', 'balanceamento', 'cinética química', 'forças intermoleculares']
-      },
-      'Português': {
-         'nome': 'português',
-         'conteudos': ['análise sintática', 'interpretação de texto', 'sequências textuais', 'coesão e coerência', 'gramática']
-      },
-      'Biologia': {
-         'nome': 'biologia',
-         'conteudos': ['citologia', 'reações metabólicas', 'histologia', 'anatomia e fisiologia', 'microbiologia', 'ecologia', 'biotecnologia']
-      },
-      'História': {
-         'nome': 'história',
-         'conteudos': ['idade média', 'idade antiga', 'américa espanhola', 'renascimento','Egito antigo', 'Grécia antiga', 'Brasil império', 'Brasil colonial', 'grandes navegações']
-      },
-      'Geografia': {
-         'nome': 'geografia',
-         'conteudos': ['Escalas', 'Coordenadas geográficas', 'geopolítica', 'biomas', 'solos', 'relevos']
-      },
-      'Filosofia': {
-         'nome': 'filosofia',
-         'conteudos': ['filósofos pré-socráticos', 'filosofia antropocêntrica', 'ética e moral']
-      }
-   }
-
-   return render_template('carregarmaterias.html', materia=materias[materia])
 
 @app.route('/logout')
 def logout():
+   session.clear()
    resp = make_response(redirect('/autenticar'))
-   resp.delete_cookie('ID_Usuario')
    return resp
+
 
 if __name__ == "__main__":
    app.run(debug=True)
