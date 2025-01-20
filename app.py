@@ -21,8 +21,8 @@ def verificar_user_logado():
       with open('static/dados_usuario.json', 'r') as json_file:
          lista_usuarios = json.load(json_file)
          for lista_dict in lista_usuarios:
-               if lista_dict.get('ID_Usuario') == ID_Usuario:
-                  return True
+            if lista_dict.get('ID_Usuario') == ID_Usuario:
+               return True
    return False
 
 @app.route('/')
@@ -130,6 +130,12 @@ def carregarmateria(materia):
       return render_template('carregarmaterias.html', materia=materias[materia], nome = nomeuser)
    else:
       return "Matéria não encontrada", 404
+
+@app.route('/cronograma')
+def cronograma():
+   if verificar_user_logado() == True:
+      return redirect('/inicio')
+   return render_template('cronograma.html')
 
 
 @app.route('/logout')
