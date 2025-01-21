@@ -16,5 +16,11 @@
         "nomeuser": "filipi",
         "email": "cruz.gmail.com",
         "senha": "12345"
+    },
+    {
+        "ID_Usuario": "0e6e8695-f19f-4ad5-80e9-317f021e7077",
+        "nomeuser": "j\u00c9SSICA",
+        "email": "JESSICA@EMAIL",
+        "senha": "123"
     }
 ]
