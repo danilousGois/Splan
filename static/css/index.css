@@ -254,9 +254,22 @@ footer p {
 
 .account-actual{
     border: 2px solid #0E9094;
-    max-width: 300px;
 }
 
+.account-actual{
+    max-width: 300px;
+    width: 100%;
+}
+
+.button-delete{
+    background-color: #FF0000;
+    height: 60px;
+    cursor: pointer;
+}
+
+.button-delete img{
+    width: 24px;
+}
 .email_user{
     font-size: 0.75rem;
 }
