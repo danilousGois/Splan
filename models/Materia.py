@@ -2,8 +2,8 @@ from utils import db
 
 class Materia(db.Model):
     __tablename__='materia'
-    id_materia = db.column(db.Integer, primary_key = True, autoincrement = True)
-    nome = db.column(db.String(150))
+    id_materia = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    nome = db.Column(db.String(150))
 
 
     def __init__(self, nome):

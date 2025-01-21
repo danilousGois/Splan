@@ -18,8 +18,8 @@ def criar_formulario():
     return render_template()
 
 
-@formulario_bp.route('/atualizarformulario/<str: id_formulario>')
-def recuperar_formulario(id_formulario):
+@formulario_bp.route('/atualizarformulario/<int:id_formulario>')
+def atualizar_formulario(id_formulario):
     formulario = Formulario.query(id_formulario)
 
     formulario.tempo_total = request.form['tempo_total']
@@ -30,7 +30,7 @@ def recuperar_formulario(id_formulario):
     return redirect('/')
 
 
-@formulario_bp.route('/recuperarformulario/<str: id_formulario>')
+@formulario_bp.route('/recuperarformulario/<int:id_formulario>')
 def recuperar_formulario(id_formulario):
     formulario = Formulario.query(id_formulario)
     db.session.commit()
@@ -38,7 +38,7 @@ def recuperar_formulario(id_formulario):
     return redirect()
 
 
-@formulario_bp.route('/deletarformulario<int: id_formulario')
+@formulario_bp.route('/deletarformulario<int:id_formulario>')
 def deletar_formulario(id_formulario):
     db.session.delete(Formulario).filter(id_formulario=id_formulario)
     db.session.commit()

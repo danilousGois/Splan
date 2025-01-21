@@ -2,10 +2,10 @@ from utils import db
 
 class Assunto(db.Model):
     __tablename__='assunto'
-    id_assunto = db.column(db.Integer, primary_key = True, autoincrement = True)
-    nome = db.column(db.String(150))
-    duracao = db.column(db.Float)
-    id_materia = db.column(db.Integer, db.ForeignKey('materia.id_materia'))
+    id_assunto = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    nome = db.Column(db.String(150))
+    duracao = db.Column(db.Float)
+    id_materia = db.Column(db.Integer, db.ForeignKey('materia.id_materia'))
 
     materia = db.relationship('Materia', foreign_keys=id_materia)
 

@@ -5,9 +5,9 @@ from utils import db
 assunto_bp = Blueprint('assunto', __name__, template_folder='templates')
 
 
-@assunto_bp.route('/recuperarassunto/<str: nome_assunto>')
-def recuperar_assunto(nome_assunto):
-    assunto = Assunto.query(nome_assunto)
+@assunto_bp.route('/recuperarassunto/<int:id_assunto>')
+def recuperar_assunto(id_assunto):
+    assunto = Assunto.query(id_assunto)
     db.session.commit()
 
     return render_template()
@@ -22,8 +22,8 @@ def carregar_assuntos():
     return assuntos
 
 
-@assunto_bp.route('/updateassunto<int: id_assunto', methods=['POST'])
-def carregar_assuntos(id_assunto):
+@assunto_bp.route('/updateassunto<int:id_assunto>', methods=['POST'])
+def carregar_assunto(id_assunto):
     assunto = Assunto.query(id_assunto)
 
     assunto.duracao = request.form['duracao']
@@ -34,7 +34,7 @@ def carregar_assuntos(id_assunto):
     return redirect(url_for('.recuperarassunto', id_assunto=id_assunto))
 
 
-@assunto_bp.route('/deletarassunto<int: id_assunto')
+@assunto_bp.route('/deletarassunto<int:id_assunto>')
 def deletar_assunto(id_assunto):
     db.session.delete(Assunto).filter(id_assunto=id_assunto)
     db.session.commit()

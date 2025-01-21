@@ -19,8 +19,8 @@ def criar_peso():
     return render_template()
 
 
-@peso_bp.route('/atualizarpeso/<str: id_materiapeso>')
-def recuperar_peso(id_materiapeso):
+@peso_bp.route('/atualizarpeso/<int:id_materiapeso>')
+def atualizar_peso(id_materiapeso):
     peso = Materia_peso.query(id_materiapeso)
 
     peso.peso = request.form['peso']
@@ -33,7 +33,7 @@ def recuperar_peso(id_materiapeso):
     return redirect('/')
 
 
-@peso_bp.route('/recuperarpeso/<str: id_materiapeso>')
+@peso_bp.route('/recuperarpeso/<int:id_materiapeso>')
 def recuperar_peso(id_materiapeso):
     formulario = Materia_peso.query(id_materiapeso)
     db.session.commit()
@@ -41,7 +41,7 @@ def recuperar_peso(id_materiapeso):
     return redirect()
 
 
-@peso_bp.route('/deletarpeso<int: id_materiapeso')
+@peso_bp.route('/deletarpeso<int:id_materiapeso>')
 def deletar_peso(id_materiapeso):
     db.session.delete(Materia_peso).filter(id_materiapeso=id_materiapeso)
     db.session.commit()

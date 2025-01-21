@@ -18,7 +18,7 @@ def criar_progresso():
     return render_template()
 
 
-@progresso_bp.route('/atualizarprogresso<int: id_progresso>')
+@progresso_bp.route('/atualizarprogresso<int:id_progresso>')
 def update_progresso(id_progresso):
     progresso = Progresso.query(id_progresso)
 
@@ -31,7 +31,7 @@ def update_progresso(id_progresso):
     return redirect(url_for('.recuperaaprogresso', id_progresso=id_progresso))
 
 
-@progresso_bp.route('/recuperarprogresso<int: id_progresso')
+@progresso_bp.route('/recuperarprogresso<int:id_progresso>')
 def recuperar_progresso(id_progresso):
     progresso = Progresso.query(id_progresso)
     db.session.commit()
@@ -39,7 +39,7 @@ def recuperar_progresso(id_progresso):
     return progresso
 
 
-@progresso_bp.route('/deletarprogresso<int: id_progresso>')
+@progresso_bp.route('/deletarprogresso<int:id_progresso>')
 def deletar_progresso(id_progresso):
     progresso = Progresso.query(id_progresso)
     db.session.delete(progresso)

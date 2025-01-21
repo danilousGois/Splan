@@ -7,9 +7,9 @@ materia_bp = Blueprint('materia', __name__, template_folder='templates')
 # @materia_bp.route('/criarmateria', methods=['GET', 'POST'])
 # def criar_materia():
 
-@materia_bp.route('/recuperarmateria/<str: nome_materia>')
-def recuperar_materia(nome_materia):
-     materia = Materia.query(nome_materia)
+@materia_bp.route('/recuperarmateria/<int:id_materia>')
+def recuperar_materia(id_materia):
+     materia = Materia.query(id_materia)
      db.session.commit()
 
 
@@ -20,7 +20,7 @@ def carregar_materias():
 
      return materias
 
-@materia_bp.route('/deletarmateria<int: id_materia')
+@materia_bp.route('/deletarmateria/<int:id_materia>')
 def deletar_materia(id_materia):
      db.session.delete(Materia).filter(id_materia=id_materia)
      db.session.commit()

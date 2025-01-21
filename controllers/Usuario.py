@@ -26,7 +26,7 @@ def criar_usuario():
     return render_template('signup.html')
 
 
-@user_bp.route('/perfil/<int: id_user>')
+@user_bp.route('/perfil/<int:id_user>')
 def recuperar_user(id_user):
     db.session.query(Usuario).filter(id_usuario=id_user)
     db.session.commit()    
@@ -35,7 +35,7 @@ def recuperar_user(id_user):
 
 
 
-@user_bp.route('/perfil/<int: id_user>')
+@user_bp.route('/perfil/<int:id_user>')
 def deletar_usuario(id_user):
     db.session.delete(Usuario).filter(id_usuario=id_user)
     db.session.commit()    
@@ -44,7 +44,7 @@ def deletar_usuario(id_user):
 
 
 
-@user_bp.route('/perfil/<int: id_user>', methods=['POST', 'GET'])
+@user_bp.route('/perfil/<int:id_user>', methods=['POST', 'GET'])
 def alterar_usuario(id_user):
 
     user = db.session.query(Usuario).filter(id_usuario=id_user)

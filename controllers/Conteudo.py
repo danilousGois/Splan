@@ -5,9 +5,9 @@ from utils import db
 conteudo_bp = Blueprint('conteudo', __name__, template_folder='templates')
 
 
-@conteudo_bp.route('/recuperarconteudo/<str: nome_conteudo>')
-def recuperar_conteudo(nome_conteudo):
-    conteudo = conteudo.query(nome_conteudo)
+@conteudo_bp.route('/recuperarconteudo/<int:id_conteudo>')
+def recuperar_conteudo(id_conteudo):
+    conteudo = conteudo.query(id_conteudo)
     db.session.commit()
 
 
@@ -20,7 +20,7 @@ def carregar_conteudos():
 
     return conteudos
 
-@conteudo_bp.route('/deletarconteudo<int: id_conteudo')
+@conteudo_bp.route('/deletarconteudo<int:id_conteudo>')
 def deletar_Conteudo(id_conteudo):
     db.session.delete(Conteudo).filter(id_conteudo=id_conteudo)
     db.session.commit()
