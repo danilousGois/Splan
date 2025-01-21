@@ -21,22 +21,22 @@ def verificar_user_logado():
       with open('static/dados_usuario.json', 'r') as json_file:
          lista_usuarios = json.load(json_file)
          for lista_dict in lista_usuarios:
-               if lista_dict.get('ID_Usuario') == ID_Usuario:
-                  return True
+            if lista_dict.get('ID_Usuario') == ID_Usuario:
+               return True
    return False
 
 @app.route('/')
 def index():
    if verificar_user_logado() == True:
       return redirect('/inicio')
-   return render_template('paginainicial.html')
+   return render_template('home.html')
 
 @app.route('/inicio')
 def carregarLandingPage():
    if 'ID_Usuario' not in session:
       return redirect('/autenticar')
    nomeuser = session['nomeuser']
-   return render_template('base_landingpage.html', nomeuser = nomeuser)
+   return render_template('base_landingpage.html', nome = nomeuser)
 
 
 
@@ -131,15 +131,21 @@ def carregarmateria(materia):
    nomeuser = session['nomeuser']
    materias = carregar_materias()
    if materia in materias:
-      return render_template('carregarmaterias.html', materia=materias[materia], nomeuser = nomeuser)
+      return render_template('carregarmaterias.html', materia=materias[materia], nome = nomeuser)
    else:
       return "Matéria não encontrada", 404
+
+@app.route('/cronograma')
+def cronograma():
+   if verificar_user_logado() == True:
+      return redirect('/inicio')
+   return render_template('cronograma.html')
 
 
 @app.route('/logout')
 def logout():
+   session.clear()
    resp = make_response(redirect('/autenticar'))
-   resp.delete_cookie('ID_Usuario')
    return resp
 
 
