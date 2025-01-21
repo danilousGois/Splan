@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'chave_secreta_projeto_PSI'
 def carregar_materias():
    if os.path.exists('static/materias.json'):
       with open('static/materias.json', 'r') as json_file:
-         materias = json.load(json_file)
+         materias -= json.load(json_file)
       return materias
    return {}
 
@@ -136,6 +136,13 @@ def cronograma():
    if verificar_user_logado() == True:
       return redirect('/inicio')
    return render_template('cronograma.html')
+
+@app.route('/profile')
+def profile():
+   if verificar_user_logado() == True:
+      return redirect('/inicio')
+   nomeuser = session['nomeuser']
+   return render_template('perfil_user.html', nome=nomeuser)
 
 
 @app.route('/logout')

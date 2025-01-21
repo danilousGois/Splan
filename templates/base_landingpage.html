@@ -20,12 +20,14 @@
     <div class="d-flex deskboard_landingpage bg-verde-pi">
         <aside class="sidebar d-flex bg-teal d-flex gap-3 align-items-center bg-branco-pi">
             <div class="content-sidebar d-flex flex-column gap-4 align-self-start h-100">
-                <div class="user-info border-bottom pb-4 d-flex align-items-center gap-3 border-dark-subtle">
-                    <img src="{{ url_for('static', filename='img/user.svg') }}" alt="">
-                    <span>
-                        {{nome}}
-                    </span>
-                </div>
+                <a href="/profile">
+                    <div class="user-info border-bottom pb-4 d-flex align-items-center gap-3 border-dark-subtle">
+                        <img src="{{ url_for('static', filename='img/user.svg') }}" alt="">
+                        <span class="text-decoration-none text-dark">
+                            {{nome}}
+                        </span>
+                    </div>
+                </a>
                 <div class="funcionalidade d-flex align-items-center gap-3">
                     <img src="{{ url_for('static', filename='img/icon_clock_.svg') }}" alt="">
                     <span class="name_funcionalidade">
@@ -84,7 +86,7 @@
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
         </aside>
-        <main class="background_deskboard content flex-grow-1 py-5 px-4 bg-branco-pi m-5 rounded">
+        <main class="background_deskboard content flex-grow-1 p-5 bg-branco-pi m-5 rounded">
             {% block conteudo %}
             {% endblock %}
         </main>

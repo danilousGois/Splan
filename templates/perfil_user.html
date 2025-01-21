@@ -1,0 +1,14 @@
+{% extends "base_landingpage.html" %}
+
+{% block conteudo %}
+<div class="perfil-box">
+    <h2>Perfil</h2>
+    <div class="account-actual d-flex p-3 rounded gap-3 mt-5">
+        <img src="{{ url_for('static', filename='img/icon_user.svg') }}" alt="">
+        <div class="info">
+            <p class="mb-0">Nome do Usuário</p>
+            <p class="email_user mb-0">Email do Usuário</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
