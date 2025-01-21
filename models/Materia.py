@@ -1,4 +1,4 @@
-from Splan.utils import db
+from utils import db
 
 class Materia(db.Model):
     __tablename__='materia'

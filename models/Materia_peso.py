@@ -1,4 +1,4 @@
-from Splan.utils import db
+from utils import db
 
 class Materia_peso(db.Model):
     __tablename__='peso'
@@ -6,6 +6,9 @@ class Materia_peso(db.Model):
     peso = db.column(db.Integer)
     id_formulario = db.column(db.Integer, db.ForeigKey('formulario.id_formulario'))
     id_materia = db.column(db.Integer, db.ForeigKey('materia.id_materia'))
+
+    formulario = db.relationship('Formulario', foreign_keys='id_formulario')
+    materia = db.relationship('Materia', foreign_keys='id_materia')
     
 
     def __init__(self, peso, id_formulario, id_materia):

@@ -1,10 +1,12 @@
-from Splan.utils import db
+from utils import db
 
 class Formulario(db.Model):
     __tablename__='formulario'
     id_formulario = db.column(db.Integer, primary_key = True, autoincrement = True)
     id_usuario = db.column(db.Integer, db.ForeignKey('usuario.id_usuario'))
     tempo_total = db.column(db.Float)
+
+    usuario = db.relationship('Usuario', foreign_keys='id_usuario')
 
 
     def __init__(self, id_usuario, tempo_total):

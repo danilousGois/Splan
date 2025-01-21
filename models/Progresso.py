@@ -1,4 +1,4 @@
-from Splan.utils import db
+from utils import db
 
 class Progresso(db.Model):
     __tablename__='progresso'
@@ -7,6 +7,9 @@ class Progresso(db.Model):
     tempo_estudado = db.column(db.Float)
     id_usuario = db.column(db.Integer, db.ForeigKey('usuario.id_usuario'))
     id_assunto = db.column(db.Integer, db.ForeigKey('assunto.id_assunto'))
+
+    usuario = db.relationship('Usuario', foreign_keys='id_usuario')
+    assunto = db.relationship('Assunto', foreign_keys='id_assunto')
     
 
     def __init__(self, concluido, tempo_estudado, id_usuario, id_assunto):

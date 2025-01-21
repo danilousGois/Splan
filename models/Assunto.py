@@ -1,11 +1,13 @@
-from Splan.utils import db
+from utils import db
 
-class Assunto(db,Model):
+class Assunto(db.Model):
     __tablename__='assunto'
     id_assunto = db.column(db.Integer, primary_key = True, autoincrement = True)
     nome = db.column(db.String(150))
     duracao = db.column(db.Float)
     id_materia = db.column(db.Integer, db.ForeignKey('materia.id_materia'))
+
+    materia = db.relationship('Materia', foreign_keys=id_materia)
 
 
     def __init__(self, nome, duracao, id_materia):
