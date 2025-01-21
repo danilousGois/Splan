@@ -44,7 +44,7 @@ def deletar_usuario(id_user):
 
 
 
-@user_bp.route('/modificarUsuario/<int: id_user>', methods=['POST', 'GET'])
+@user_bp.route('/perfil/<int: id_user>', methods=['POST', 'GET'])
 def alterar_usuario(id_user):
 
     user = db.session.query(Usuario).filter(id_usuario=id_user)
