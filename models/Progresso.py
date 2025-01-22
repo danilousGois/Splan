@@ -8,8 +8,8 @@ class Progresso(db.Model):
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'))
     id_assunto = db.Column(db.Integer, db.ForeignKey('assunto.id_assunto'))
 
-    usuario = db.relationship('Usuario', foreign_keys='id_usuario')
-    assunto = db.relationship('Assunto', foreign_keys='id_assunto')
+    usuario = db.relationship('Usuario', foreign_keys=id_usuario)
+    assunto = db.relationship('Assunto', foreign_keys=id_assunto)
     
 
     def __init__(self, concluido, tempo_estudado, id_usuario, id_assunto):

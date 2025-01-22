@@ -6,55 +6,46 @@ user_bp = Blueprint('usuario', __name__, template_folder='templates')
 
 
 #fazer as verificações necesárias
-
-
-@user_bp.route('/', methods=['POST', 'GET'])
+@user_bp.route('/cadastro', methods=['POST', 'GET'])
 def criar_usuario():
+    if request.method == 'GET':
+        return render_template('signup.html')
 
     nome = request.form['nome']
     email = request.form['email']
     telefone = request.form['telefone']
     senha = request.form['senha']
+    confirmarsenha = request.form['confirmarsenha']
 
+    if Usuario.query.get(email) == False:
+        if senha == confirmarsenha:
+            user = Usuario(nome, telefone, email, senha)
 
-    user = Usuario(nome, telefone, email, senha)
-    db.session.add(user)
-    db.session.commit()
+            db.session.add(user)
+            db.session.commit()
 
-    #usar sessão de usuario para guardar o user logado e fazer o crud
+            # return render_template('base_landingpage.html')
+            return 'Deu certoo'
+        else:
+            flash('email ja cadastrado','warning')
+            return render_template('signup.html')
+    else:
+        flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
+        return render_template('signup.html')
 
-    return render_template('signup.html')
+#usar sessão de usuario para guardar o user logado e fazer o crud
 
+@user_bp.route('/login', methods=['POST', 'GET'])
+def login_usuario():
+    if request.method == 'GET':
+        return render_template('login.html')
+    
+    else:
+        email = request.form['email']
+        senha = request.form['senha']
 
-@user_bp.route('/perfil/<int:id_user>')
-def recuperar_user(id_user):
-    db.session.query(Usuario).filter(id_usuario=id_user)
-    db.session.commit()    
+        user = Usuario.query(email)
 
-    return render_template('perfil_user.html') # nome de arquivo inventado
-
-
-
-@user_bp.route('/perfil/<int:id_user>')
-def deletar_usuario(id_user):
-    db.session.delete(Usuario).filter(id_usuario=id_user)
-    db.session.commit()    
-
-    return render_template('perfil_user.html') # nome de arquivo inventado
-
-
-
-@user_bp.route('/perfil/<int:id_user>', methods=['POST', 'GET'])
-def alterar_usuario(id_user):
-
-    user = db.session.query(Usuario).filter(id_usuario=id_user)
-
-    user.nome = request.form['nome']
-    user.email = request.form['email']
-    user.telefone = request.form['telefone']
-    user.senha = request.form['senha']
-
-    db.session.add(user)
-    db.session.commit()
-
-    return redirect(url_for('.perfil', id_user=id_user))
+        if user.senha == senha:
+            # return render_template('base_landingpage.html')
+            return 'Deu certoo'

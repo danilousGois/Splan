@@ -24,35 +24,35 @@
         {% for tipo, msg in mensagens %}
         <div class="alert alert-{{tipo}}" role="alert">{{msg}}</div>
         {% endfor %}
-        {% endif %}
+        {% endif %} 
 
-        <form action="{{url_for('criar_usuario')}}" method="post" class="form-sign-up ms-5">
+        <form action="{{url_for('usuario.criar_usuario')}}" method="post" class="form-sign-up ms-5">
             <div class="content-singup d-flex flex-column gap-3">
                 <h1 class="">Crie sua conta:</h1>
                 <div class="div_input p-3 d-flex gap-4 align-items-center">
                     <i class="fa-solid fa-user"></i>
                     <input class="form-control bg-transparent border-0" name='nome' type="text" placeholder="Nome"
-                        aria-label="default input">
+                        aria-label="default input" required>
                 </div>
                 <div class="div_input p-3 d-flex gap-4 align-items-center"> 
                     <i class="fa-solid fa-envelope"></i>
                     <input class="form-control bg-transparent border-0" name='email' type="text" placeholder="Email"
-                        aria-label="default input">
+                        aria-label="default input" required>
                 </div>
                 <div class="div_input p-3 d-flex gap-4 align-items-center"> 
                     <i class="fa-solid fa-envelope"></i>
                     <input class="form-control bg-transparent border-0" name='telefone' type="text" placeholder="Telefone"
-                        aria-label="default input">
+                        aria-label="default input" required>
                 </div>
                 <div class="div_input p-3 d-flex gap-4 align-items-center">
                     <i class="fa-solid fa-lock"></i>
                     <input class="form-control bg-transparent border-0" name="senha" type="password"
-                        placeholder="Password" aria-label="default input">
+                        placeholder="Password" aria-label="default input" required>
                 </div>
                 <div class="div_input p-3 d-flex gap-4 align-items-center">
                     <i class="fa-solid fa-lock"></i>
                     <input class="form-control bg-transparent border-0" name="confirmarsenha" type="password"
-                        placeholder="Confirm Password" aria-label="default input">
+                        placeholder="Confirm Password" aria-label="default input" required>
                 </div>
                 <button type="submit" class="p-3 rounded-5 fw-semibold btn_cadastro border-1 m-auto mt-3 border-none">Fazer cadastro</button>
             </div>

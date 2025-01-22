@@ -19,7 +19,7 @@
                 <div class="alert alert-{{tipo}}" role="alert">{{msg}}</div>
             {% endfor %}
         {% endif %}
-        <form action="{{ url_for('formulario') }}" method="post" class="form-formulario_cronograma">
+        <form action="{{ url_for() }}" method="post" class="form-formulario_cronograma">
             <h1 class="text-center">Insira os dados solicitados</h1>
             <div class="content-formulario_cronograma d-flex flex-column gap-4">
                 <div class="div_input p-3 d-flex gap-4 align-items-center">

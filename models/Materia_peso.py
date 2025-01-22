@@ -7,8 +7,8 @@ class Materia_peso(db.Model):
     id_formulario = db.Column(db.Integer, db.ForeignKey('formulario.id_formulario'))
     id_materia = db.Column(db.Integer, db.ForeignKey('materia.id_materia'))
 
-    formulario = db.relationship('Formulario', foreign_keys='id_formulario')
-    materia = db.relationship('Materia', foreign_keys='id_materia')
+    formulario = db.relationship('Formulario', foreign_keys=id_formulario)
+    materia = db.relationship('Materia', foreign_keys=id_materia)
     
 
     def __init__(self, peso, id_formulario, id_materia):

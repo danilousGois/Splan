@@ -25,16 +25,16 @@
         {% endif %}
 
 
-        <form action="{{ url_for('verificarlogin') }}" method="post" class="form-login">
+        <form action="{{ url_for('usuario.login_usuario')}}" method="post" class="form-login">
             <h1 class="text-uppercase text-center">login</h1>
             <div class="content-login d-flex flex-column gap-4">
                 <div class="div_input p-3 d-flex gap-4 align-items-center">
                     <i class="fa-regular fa-envelope"></i>
-                    <input class="form-control bg-transparent border-0" name='email' type="text" placeholder="Email" aria-label="default input">
+                    <input class="form-control bg-transparent border-0" name='email' type="text" placeholder="Email" aria-label="default input" required>
                 </div>
                 <div class="div_input p-3 d-flex gap-4 align-items-center">
                     <i class="fa-solid fa-lock"></i>
-                    <input class="form-control bg-transparent border-0" name="senha" type="password" placeholder="Password" aria-label="default input">
+                    <input class="form-control bg-transparent border-0" name="senha" type="password" placeholder="Password" aria-label="default input" required>
                 </div>
                 <button type="submit" class="py-2 rounded-5 fw-semibold">Fazer login</button>
             </div>

@@ -6,7 +6,7 @@ class Conteudo(db.Model):
     nome = db.Column(db.String(150))
     id_assunto = db.Column(db.Integer, db.ForeignKey('assunto.id_assunto'))
 
-    assunto = db.relationship('Assunto', foreign_keys='id_assunto')
+    assunto = db.relationship('Assunto', foreign_keys=id_assunto)
 
 
     def __init__(self, nome, id_assunto):
