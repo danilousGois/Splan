@@ -16,10 +16,11 @@ def criar_usuario():
     telefone = request.form['telefone']
     senha = request.form['senha']
     confirmarsenha = request.form['confirmarsenha']
+    tipo_user = 0
 
     if Usuario.query.get(email) == False:
         if senha == confirmarsenha:
-            user = Usuario(nome, telefone, email, senha)
+            user = Usuario(nome, telefone, email, senha, tipo_user)
 
             db.session.add(user)
             db.session.commit()
