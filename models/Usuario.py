@@ -7,18 +7,15 @@ class Usuario(db.Model):
     telefone = db.Column(db.String(20))
     email = db.Column(db.String(200))
     senha = db.Column(db.String(200))
-<<<<<<< HEAD
-    user_tipo = db.Column(db.Integer)
-=======
     tipo_user = db.Column(db.Integer)
->>>>>>> d35a044080fde2211f0cf59fe58e145414fc7489
 
 
-    def __init__(self, nome, telefone, email, senha):
+    def __init__(self, nome, telefone, email, senha, tipo_user):
         self.nome = nome
         self.telefone = telefone
         self.email = email
         self.senha = senha
+        self.tipo_user = tipo_user
 
     def __repr__(self):
         return "<Usuario {}>".format(self.nome)
