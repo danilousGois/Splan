@@ -7,7 +7,11 @@ class Usuario(db.Model):
     telefone = db.Column(db.String(20))
     email = db.Column(db.String(200))
     senha = db.Column(db.String(200))
+<<<<<<< HEAD
     user_tipo = db.Column(db.Integer)
+=======
+    tipo_user = db.Column(db.Integer)
+>>>>>>> d35a044080fde2211f0cf59fe58e145414fc7489
 
 
     def __init__(self, nome, telefone, email, senha):
