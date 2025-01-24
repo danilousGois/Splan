@@ -18,13 +18,12 @@ def criar_usuario():
     confirmarsenha = request.form['confirmarsenha']
     tipo_user = 0
 
-    if Usuario.query.get(email) == False:
+    if db.session.query(Usuario).filter(email) == False:
         if senha == confirmarsenha:
             user = Usuario(nome, telefone, email, senha, tipo_user)
 
             db.session.add(user)
             db.session.commit()
-
             # return render_template('base_landingpage.html')
             return 'Deu certoo'
         else:
@@ -34,6 +33,7 @@ def criar_usuario():
         flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
         return render_template('signup.html')
 
+
 #usar sessão de usuario para guardar o user logado e fazer o crud
 
 @user_bp.route('/login', methods=['POST', 'GET'])
@@ -41,12 +41,19 @@ def login_usuario():
     if request.method == 'GET':
         return render_template('login.html')
     
-    else:
-        email = request.form['email']
-        senha = request.form['senha']
+    email = request.form['email']
+    senha = request.form['senha']
 
-        user = Usuario.query(email)
+    user = Usuario.query.filter_by(email=email).one()
 
+    if user:
         if user.senha == senha:
-            # return render_template('base_landingpage.html')
-            return 'Deu certoo'
+            return 'User logado'
+        else:
+            flash('Senha incorreta!', 'warning')
+            return redirect(url_for('login.html'))
+    else:
+        flash('There is no user bounded with this email', 'warning')
+        return redirect(url_for('login.html'))
+
+
