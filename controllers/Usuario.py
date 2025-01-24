@@ -4,8 +4,7 @@ from utils import db
 
 user_bp = Blueprint('usuario', __name__, template_folder='templates')
 
-
-#fazer as verificações necesárias
+ 
 @user_bp.route('/cadastro', methods=['POST', 'GET'])
 def criar_usuario():
     if request.method == 'GET':
@@ -18,20 +17,23 @@ def criar_usuario():
     confirmarsenha = request.form['confirmarsenha']
     tipo_user = 0
 
-    if db.session.query(Usuario).filter(email) == False:
-        if senha == confirmarsenha:
-            user = Usuario(nome, telefone, email, senha, tipo_user)
-
-            db.session.add(user)
-            db.session.commit()
-            # return render_template('base_landingpage.html')
-            return 'Deu certoo'
-        else:
-            flash('email ja cadastrado','warning')
-            return render_template('signup.html')
-    else:
+    user_existente = Usuario.query.filter_by(email=email).first()
+    if user_existente:
+        flash('Email já cadastrado!', 'warning')
+        return render_template('signup.html')
+    elif senha != confirmarsenha:
         flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
         return render_template('signup.html')
+
+    user = Usuario(nome, telefone, email, senha, tipo_user)
+
+    db.session.add(user)
+    db.session.commit()
+
+    return 'logado'
+
+
+
 
 
 #usar sessão de usuario para guardar o user logado e fazer o crud
@@ -44,16 +46,16 @@ def login_usuario():
     email = request.form['email']
     senha = request.form['senha']
 
-    user = Usuario.query.filter_by(email=email).one()
+    user = Usuario.query.filter_by(email=email).first()
 
     if user:
         if user.senha == senha:
-            return 'User logado'
+            return 'ĺogado'
         else:
             flash('Senha incorreta!', 'warning')
-            return redirect(url_for('login.html'))
+            return render_template('login.html')
     else:
         flash('There is no user bounded with this email', 'warning')
-        return redirect(url_for('login.html'))
+        return render_template('login.html')
 
 
