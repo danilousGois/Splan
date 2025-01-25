@@ -118,7 +118,7 @@ def verificarlogin():
          flash('Esse usuário não existe! Faça o cadastro!')
          return redirect('/cadastrar')
    else:
-      flash('Todos os campos devem ser preenchidos!')
+      flash('Todos os campos devem ser preenchidos!', "warning")
       return redirect('/autenticar')
 
 
