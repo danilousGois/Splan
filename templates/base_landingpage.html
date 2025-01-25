@@ -20,7 +20,7 @@
     <div class="d-flex deskboard_landingpage bg-verde-pi">
         <aside class="sidebar d-flex bg-teal d-flex gap-3 align-items-center bg-branco-pi">
             <div class="content-sidebar d-flex flex-column gap-4 align-self-start h-100">
-                <a href="/profile">
+                <a href="/profile" class="text-decoration-none">
                     <div class="user-info border-bottom pb-4 d-flex align-items-center gap-3 border-dark-subtle">
                         <img src="{{ url_for('static', filename='img/user.svg') }}" alt="">
                         <span class="text-decoration-none text-dark">
@@ -28,12 +28,14 @@
                         </span>
                     </div>
                 </a>
-                <div class="funcionalidade d-flex align-items-center gap-3">
-                    <img src="{{ url_for('static', filename='img/icon_clock_.svg') }}" alt="">
-                    <span class="name_funcionalidade">
-                        Cronograma
-                    </span>
-                </div>
+                <a href="/cronograma" class="text-decoration-none">
+                    <div class="funcionalidade d-flex align-items-center gap-3">
+                        <img src="{{ url_for('static', filename='img/icon_clock_.svg') }}" alt="">
+                        <span class="name_funcionalidade text-dark">
+                            Cronograma
+                        </span>
+                    </div>
+                </a>
                 <div class="funcionalidade d-flex flex-column gap-4">
                     <div class="d-flex align-items-center gap-3">
                         <img src="{{ url_for('static', filename='img/icon-materias.svg') }}" alt="">
