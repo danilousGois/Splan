@@ -1,8 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Rammetto+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* Classes para mudar o background */
+.bg-vermelhor-pi {
+    background-color: #FF5A5F;
+}
+
+.bg-verde-pi {
+    background-color: #0E9094;
+}
+
+.bg-cinza-pi {
+    background-color: #3C3C3C;
+}
+
+.bg-branco-pi {
+    background-color: #F5F5F5;
+}
+
+/* Classes para mudar a cor da fonte */
+.text-vermelhor-pi {
+    color: #FF5A5F;
+}
+
+.text-verde-pi {
+    color: #0E9094;
+}
+
+.text-cinza-pi {
+    color: #3C3C3C;
+}
+
+.text-branco-pi {
+    color: #F5F5F5;
+}
 
 
-body{
+
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -18,7 +52,7 @@ body {
 }
 
 /*Style Landing Page*/
-.deskboard_landingpage{
+.deskboard_landingpage {
     height: 100%;
 }
 
@@ -32,7 +66,7 @@ body {
 }
 
 .form-login {
-    padding: 88px;
+    padding: 50px;
     box-shadow: 10px 10px 50px 25px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     background-color: #F5F5F5;
@@ -44,7 +78,7 @@ body {
 
 .form-login i,
 .form-sign-up i {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #0E9094;
 }
 
@@ -54,7 +88,6 @@ body {
 }
 
 .div_input input {
-    font-size: 1.3rem;
     padding: 0;
 }
 
@@ -70,11 +103,11 @@ body {
 
 /*Estilos de Sing Up*/
 
-.singup{
+.singup {
     width: 35%;
 }
 
-.singup::after{
+.singup::after {
     content: ' ';
     height: 200px;
     width: 200px;
@@ -111,12 +144,12 @@ body {
     color: #F5F5F5;
 }
 
-.span-text h2{
-    font-size: 4rem;
+.span-text h2 {
+    font-size: 3.5rem;
     font-family: "Rammetto One", sans-serif;
 }
 
-.span-text p{
+.span-text p {
     font-family: "Inknut Antiqua", serif;
     font-size: 2rem;
 
@@ -126,46 +159,48 @@ li>a {
     text-decoration: none;
 }
 
-ul{
+ul {
     list-style: none;
 }
-header ul a{
+
+header ul a {
     color: #000;
 }
 
-.acesso li a{
+.acesso li a {
     border-radius: 16px;
 }
-.acesso li:nth-child(2) a{
+
+.acesso li:nth-child(2) a {
     border-radius: 16px;
     background-color: #0E9094;
 }
 
-.splan-hero h1{
+.splan-hero h1 {
     font-size: 4rem;
 }
 
-section{
+section {
     padding: 7.5rem 0;
     margin: 2rem 0;
 }
 
-.splan-operation h2::after{
+.splan-operation h2::after {
     content: "";
     position: absolute;
     height: 3px;
     width: 50px;
     background-color: #B7B3B3;
-    bottom:-20px;
+    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.content-splan-hero{
-    margin-bottom:4rem;
+.content-splan-hero {
+    margin-bottom: 4rem;
 }
 
-.splan-we-go figure{
+.splan-we-go figure {
     z-index: 2;
 }
 
@@ -177,38 +212,63 @@ section{
     overflow: hidden;
 }
 
-.bg-splan-our-project,footer,.splan-we-go,.background_deskboard{
+.bg-splan-our-project,
+footer,
+.splan-we-go {
     background-color: #0E9094;
 }
 
-.bg-splan-our-project p{
+.bg-splan-our-project p {
     line-height: 175.9%;
 }
 
-footer .devs{
+footer .devs {
     background-color: #3C3C3C;
     border-radius: 25px;
     padding: 0 2rem;
 }
 
-footer p{
+footer p {
     max-width: 310px;
 }
 
 /*deskboard_landingpage*/
 
-.sidebar{
+.sidebar {
     padding: 2rem 1.25rem;
 }
 
-.content-sidebar{
+.content-sidebar {
     opacity: 0;
-    width: 0px;
-    transition: all .1s;
+    width: 0;
+    overflow: hidden;
+    transition: all 0.5s;
 }
 
-.sidebar:hover .content-sidebar{
+.sidebar:hover .content-sidebar {
     opacity: 1;
-    width: auto;
-    transition: all .1s;
+    width: 150px;
+    transition: all 0.5s;
+}
+
+.account-actual{
+    border: 2px solid #0E9094;
+}
+
+.account-actual{
+    max-width: 300px;
+    width: 100%;
+}
+
+.button-delete{
+    background-color: #FF0000;
+    height: 60px;
+    cursor: pointer;
+}
+
+.button-delete img{
+    width: 24px;
+}
+.email_user{
+    font-size: 0.75rem;
 }

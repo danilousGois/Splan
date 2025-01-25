@@ -9,9 +9,9 @@ app.config['SECRET_KEY'] = 'chave_secreta_projeto_PSI'
 def carregar_materias():
    if os.path.exists('static/materias.json'):
       with open('static/materias.json', 'r') as json_file:
-         materias = json.load(json_file)
+         materias = json.load(json_file)  # Use '=' para atribuir os dados do arquivo à variável
       return materias
-   return {}
+   return {} 
 
 def verificar_user_logado():
    ID_Usuario = request.cookies.get('ID_Usuario')
@@ -21,8 +21,8 @@ def verificar_user_logado():
       with open('static/dados_usuario.json', 'r') as json_file:
          lista_usuarios = json.load(json_file)
          for lista_dict in lista_usuarios:
-               if lista_dict.get('ID_Usuario') == ID_Usuario:
-                  return True
+            if lista_dict.get('ID_Usuario') == ID_Usuario:
+               return True
    return False
 
 @app.route('/')
@@ -130,6 +130,20 @@ def carregarmateria(materia):
       return render_template('carregarmaterias.html', materia=materias[materia], nome = nomeuser)
    else:
       return "Matéria não encontrada", 404
+
+@app.route('/cronograma')
+def cronograma():
+   nomeuser = session['nomeuser']
+   if verificar_user_logado() == True:
+      return redirect('/inicio')
+   return render_template('cronograma.html', nome = nomeuser)
+
+@app.route('/profile')
+def profile():
+   if verificar_user_logado() == True:
+      return redirect('/inicio')
+   nomeuser = session['nomeuser']
+   return render_template('perfil_user.html', nome=nomeuser)
 
 
 @app.route('/logout')

@@ -15,7 +15,7 @@
     <div class="singup">
 
         <div class="span-text position-absolute">
-            <h2 class="text-center mb-5">Splan</h2>
+            <h2 class="text-center mb-4">Splan</h2>
             <p>Construindo um futuro!</p>
         </div>
         {% set mensagens = get_flashed_messages(with_categories=true) %}
@@ -29,27 +29,27 @@
         <form action="{{url_for('validarsignup')}}" method="post" class="form-sign-up ms-5">
             <div class="content-singup d-flex flex-column gap-3">
                 <h1 class="">Crie sua conta:</h1>
-                <div class="div_input p-3 d-flex gap-4 align-items-center">
+                <div class="div_input p-3 py-2 d-flex gap-3 align-items-center">
                     <i class="fa-solid fa-user"></i>
                     <input class="form-control bg-transparent border-0" name='nome' type="text" placeholder="Nome"
                         aria-label="default input">
                 </div>
-                <div class="div_input p-3 d-flex gap-4 align-items-center"> 
+                <div class="div_input p-3 py-2 d-flex gap-3 align-items-center"> 
                     <i class="fa-solid fa-envelope"></i>
                     <input class="form-control bg-transparent border-0" name='email' type="text" placeholder="Email"
                         aria-label="default input">
                 </div>
-                <div class="div_input p-3 d-flex gap-4 align-items-center">
+                <div class="div_input p-3 py-2 d-flex gap-3 align-items-center">
                     <i class="fa-solid fa-lock"></i>
                     <input class="form-control bg-transparent border-0" name="senha" type="password"
                         placeholder="Password" aria-label="default input">
                 </div>
-                <div class="div_input p-3 d-flex gap-4 align-items-center">
+                <div class="div_input p-3 py-2 d-flex gap-3 align-items-center">
                     <i class="fa-solid fa-lock"></i>
                     <input class="form-control bg-transparent border-0" name="confirmarsenha" type="password"
                         placeholder="Confirm Password" aria-label="default input">
                 </div>
-                <button type="submit" class="p-3 rounded-5 fw-semibold btn_cadastro border-1 m-auto mt-3 border-none">Fazer cadastro</button>
+                <button type="submit" class="p-3 rounded-5 fw-semibold btn_cadastro border-1 m-auto mt-3 border-none w-100">Fazer cadastro</button>
             </div>
         </form>
     </div>
