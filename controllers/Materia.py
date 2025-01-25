@@ -4,23 +4,35 @@ from utils import db
 
 materia_bp = Blueprint('materia', __name__, template_folder='templates')
 
-# @materia_bp.route('/criarmateria', methods=['GET', 'POST'])
-# def criar_materia():
+def listar_materias():
+    lista_materias = Materia.query.all()
+    
 
-@materia_bp.route('/recuperarmateria/<int:id_materia>')
-def recuperar_materia(id_materia):
-     materia = Materia.query(id_materia)
-     db.session.commit()
+def criar_materia(nome):
+    materia = Materia(nome)
+
+    db.session.add(materia)
+    db.session.commit()
 
 
-@materia_bp.route('/materias')
-def carregar_materias():
-     materias = Materia.query.all()
-     db.session.commit()
+@materia_bp.route('/inserir_materias')
+def inserir_materia():
+    lista_materias = ['matemática', 'português', 'história', 'geografia', 'física', 'química', 'filosofia', 'sociologia', 'artes', 'biologia', 'inglês', 'literatura']
 
-     return materias
+    # for materia in lista_materias:
+    #     criar_materia(materia)
+        
+    return 'hello'
 
-@materia_bp.route('/deletarmateria/<int:id_materia>')
-def deletar_materia(id_materia):
-     db.session.delete(Materia).filter(id_materia=id_materia)
-     db.session.commit()
+@materia_bp.route('/mostrar_materias')
+def recuperar_materias():
+    
+    # db.session.query(Materia).delete()
+    # db.session.commit()
+
+    return 'excluded'
+        
+    
+@materia_bp.route('/carregar_materias')
+def index_materias():
+    return render_template('create_materias.html')

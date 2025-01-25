@@ -13,7 +13,7 @@ from controllers.Conteudo import conteudo_bp
 from controllers.Formulario import formulario_bp
 from controllers.Progresso import progresso_bp
 from controllers.Materia_peso import peso_bp
-
+from controllers.Materia import inserir_materia
 app = Flask(__name__)
 
 app.register_blueprint(user_bp, url_prefix='/usuario')
@@ -42,6 +42,8 @@ migrate = Migrate(app, db)
 @app.route('/')
 def index():
     return render_template('home.html')
+
+
 
 
 # def carregar_materias():

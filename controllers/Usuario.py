@@ -20,7 +20,7 @@ def criar_usuario():
     user_existente = Usuario.query.filter_by(email=email).first()
     if user_existente:
         flash('Email já cadastrado!', 'warning')
-        return render_template('signup.html')
+        return render_template('login.html')
     elif senha != confirmarsenha:
         flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
         return render_template('signup.html')
@@ -30,7 +30,7 @@ def criar_usuario():
     db.session.add(user)
     db.session.commit()
 
-    return 'logado'
+    return render_template('base_landingpage.html')
 
 
 
@@ -50,7 +50,7 @@ def login_usuario():
 
     if user:
         if user.senha == senha:
-            return 'ĺogado'
+            return render_template('base_landingpage.html')
         else:
             flash('Senha incorreta!', 'warning')
             return render_template('login.html')
