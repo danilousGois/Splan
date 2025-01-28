@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, make_response, session, Blueprint
 from models.Usuario import Usuario
 from utils import db
+import hashlib
 
 user_bp = Blueprint('usuario', __name__, template_folder='templates')
 
@@ -15,7 +16,7 @@ def criar_usuario():
     telefone = request.form['telefone']
     senha = request.form['senha']
     confirmarsenha = request.form['confirmarsenha']
-    tipo_user = 0
+    tipo_user = request.form['tipo_user']
 
     user_existente = Usuario.query.filter_by(email=email).first()
     if user_existente:
@@ -24,13 +25,15 @@ def criar_usuario():
     elif senha != confirmarsenha:
         flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
         return render_template('signup.html')
+    
+    hash_senha = hashlib.sha256(senha.encode()).hexdigest()
 
-    user = Usuario(nome, telefone, email, senha, tipo_user)
+    user = Usuario(nome, telefone, email, hash_senha, tipo_user)
 
     db.session.add(user)
     db.session.commit()
 
-    return render_template('base_landingpage.html')
+    return render_template('base_landingpage.html', nome=user.nome)
 
 
 
@@ -49,8 +52,9 @@ def login_usuario():
     user = Usuario.query.filter_by(email=email).first()
 
     if user:
-        if user.senha == senha:
-            return render_template('base_landingpage.html')
+        hash_senha = hashlib.sha256(senha.encode()).hexdigest()
+        if user.senha == hash_senha:
+            return render_template('base_landingpage.html', nome=user.nome)
         else:
             flash('Senha incorreta!', 'warning')
             return render_template('login.html')
