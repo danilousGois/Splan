@@ -145,6 +145,10 @@ def profile():
    nomeuser = session['nomeuser']
    return render_template('perfil_user.html', nome=nomeuser)
 
+@app.route('/formulario')
+def formulario():
+   return render_template('formulario.html')
+
 
 @app.route('/logout')
 def logout():
