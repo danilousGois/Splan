@@ -181,6 +181,10 @@ def index():
 #       return redirect('/inicio')
 #    return render_template('cronograma.html')
 
+@app.route('/formulario')
+def formulario():
+   return render_template('formulario.html')
+
 
 # @app.route('/logout')
 # def logout():
