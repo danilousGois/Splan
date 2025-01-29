@@ -84,7 +84,7 @@ body {
 
 .div_input {
     border: 3px solid #0E9094;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .div_input input {
@@ -271,4 +271,32 @@ footer p {
 }
 .email_user{
     font-size: 0.75rem;
+}
+
+body{
+    background-image: url('../img/bg_formulario.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.form-formulario_cronograma{
+    max-width: 28.125rem;
+}
+
+.container{
+    border-radius: 30px;
+    background:  #fff;
+    box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.15);
+    max-width: 40.625rem;
+}
+
+.content-formulario_cronograma{
+
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
 }
