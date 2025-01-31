@@ -6,7 +6,7 @@ class Assunto(db.Model):
     nome = db.Column(db.String(150))
     duracao = db.Column(db.Float)
     id_materia = db.Column(db.Integer, db.ForeignKey('materia.id_materia'))
-
+    
     materia = db.relationship('Materia', foreign_keys=id_materia)
 
 

@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 import json
 import os
 from flask_migrate import Migrate
-from utils import db
+from utils import db, login_manager
 import uuid
 from controllers.Usuario import user_bp
 from controllers.Materia import materia_bp
@@ -37,6 +37,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 migrate = Migrate(app, db)
+login_manager.init_app(app)
 
 
 @app.route('/')
