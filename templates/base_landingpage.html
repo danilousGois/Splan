@@ -20,7 +20,7 @@
     <div class="d-flex deskboard_landingpage bg-verde-pi">
         <aside class="sidebar d-flex bg-teal d-flex gap-3 align-items-center bg-branco-pi">
             <div class="content-sidebar d-flex flex-column gap-4 align-self-start h-100">
-                <a href="/profile" class="text-decoration-none">
+                <a href="{{url_for('usuario.carregar_perfil')}}" class="text-decoration-none">
                     <div class="user-info border-bottom pb-4 d-flex align-items-center gap-3 border-dark-subtle">
                         <img src="{{ url_for('static', filename='img/user.svg') }}" alt="">
                         <span class="text-decoration-none text-dark">
@@ -73,7 +73,7 @@
                         Pesquisa
                     </span>
                 </div>
-                <a href="{{url_for('index')}}" class="text-danger mt-auto align-items-end mt-auto d-inline-block"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sair</span></a>
+                <a href="{{url_for('usuario.logoff')}}" class="text-danger mt-auto align-items-end mt-auto d-inline-block text-decoration-none"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sair</span></a>
             </div>
             <div class="icon-chevron">
                 <i class="fa-solid fa-chevron-right"></i>
