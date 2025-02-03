@@ -36,7 +36,7 @@ def carregarLandingPage():
    if 'ID_Usuario' not in session:
       return redirect('/autenticar')
    nomeuser = session['nomeuser']
-   return render_template('base_landingpage.html', nome = nomeuser)
+   return render_template('onboarding.html', nome = nomeuser)
 
 
 
