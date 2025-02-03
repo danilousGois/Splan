@@ -2,14 +2,19 @@
 
 {% block conteudo %}
     <div>
-        <h2>Bem vindo(a) à matéria de {{materia.nome}}</h2>
+        <h2>Assuntos da matéria de <span class="text-capitalize">{{ materia.nome }}</span></h2>
     </div>
-    <div>
-        <p>Aqui estão os assuntos desta matéria:</p>
-        <ul>
-            {% for assunto in materia.conteudos: %}
-            <li>{{assunto}}</li>
-            {% endfor %}
-        </ul>
+    <div class="box_materias flex flex-column gap-5 mt-5">
+        {% for i in range(0, materia.conteudos|length, 3) %}
+            <div class="box_assuntos row mb-5">
+                {% for assunto in materia.conteudos[i:i+3] %}
+                    <div class="box_conteudos_assuntos col-4">
+                        <div class="name_assunto w-100 p-4">
+                            <h5 class="text-center text-light text-capitalize">{{ assunto }}</h5>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
