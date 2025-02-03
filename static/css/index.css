@@ -84,7 +84,7 @@ body {
 
 .div_input {
     border: 3px solid #0E9094;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .div_input input {
@@ -251,24 +251,61 @@ footer p {
     transition: all 0.5s;
 }
 
-.account-actual{
+.account-actual {
     border: 2px solid #0E9094;
 }
 
-.account-actual{
+.account-actual {
     max-width: 300px;
     width: 100%;
 }
 
-.button-delete{
+.button-delete {
     background-color: #FF0000;
     height: 60px;
     cursor: pointer;
 }
 
-.button-delete img{
+.button-delete img {
     width: 24px;
 }
-.email_user{
+
+.email_user {
     font-size: 0.75rem;
+}
+
+.body-formulario_cronograma {
+    background-image: url('../img/bg_formulario.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.form-formulario_cronograma {
+    max-width: 28.125rem;
+}
+
+.container_formulario_cronograma {
+    border-radius: 30px;
+    background: #fff;
+    box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.15);
+    max-width: 40.625rem;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form-check-input {
+    border: 2px solid;
+}
+
+.content_onboarding h4 {
+    font-weight: normal;
+}
+
+.content_onboarding{
+    max-width: 466px;
 }

@@ -42,9 +42,16 @@ login_manager.init_app(app)
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+   return render_template('home.html')
+
+
+
+@app.route('/formulario')
+def formulario():
+   return render_template('formulario.html')
 
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+

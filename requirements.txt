@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+alembic==1.14.1
+>>>>>>> dev
 anyio==4.7.0
 argon2-cffi==23.1.0
 argon2-cffi-bindings==21.2.0
@@ -25,11 +29,22 @@ executing==2.1.0
 fastjsonschema==2.21.1
 filelock==3.13.1
 Flask==3.1.0
+<<<<<<< HEAD
+=======
+Flask-Login==0.6.3
+Flask-Migrate==4.1.0
+Flask-Script==2.0.6
+Flask-SQLAlchemy==3.1.1
+>>>>>>> dev
 fonttools==4.55.3
 fqdn==1.5.1
 fsspec==2024.2.0
 gitdb==4.0.11
 GitPython==3.1.43
+<<<<<<< HEAD
+=======
+greenlet==3.1.1
+>>>>>>> dev
 h11==0.14.0
 httpcore==1.0.7
 httpx==0.28.1
@@ -57,6 +72,10 @@ jupyterlab_git==0.50.2
 jupyterlab_pygments==0.3.0
 jupyterlab_server==2.27.3
 kiwisolver==1.4.7
+<<<<<<< HEAD
+=======
+Mako==1.3.8
+>>>>>>> dev
 MarkupSafe==3.0.2
 matplotlib==3.9.3
 matplotlib-inline==0.1.7
@@ -87,8 +106,15 @@ ptyprocess==0.7.0
 pure_eval==0.2.3
 pycparser==2.22
 Pygments==2.18.0
+<<<<<<< HEAD
 pyparsing==3.2.0
 python-dateutil==2.9.0.post0
+=======
+PyMySQL==1.1.1
+pyparsing==3.2.0
+python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
+>>>>>>> dev
 python-json-logger==3.2.0
 pytz==2024.2
 PyYAML==6.0.2
@@ -107,6 +133,10 @@ six==1.17.0
 smmap==5.0.1
 sniffio==1.3.1
 soupsieve==2.6
+<<<<<<< HEAD
+=======
+SQLAlchemy==2.0.37
+>>>>>>> dev
 stack-data==0.6.3
 sympy==1.13.1
 tenacity==9.0.0
