@@ -45,7 +45,6 @@ def load_user():
     return usuario
 
 
-#usar sessão de usuario para guardar o user logado e fazer o crud
 
 @user_bp.route('/login', methods=['POST', 'GET'])
 def login_usuario():
