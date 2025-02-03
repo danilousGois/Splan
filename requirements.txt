@@ -1,1 +1,16 @@
 
+Flask==3.1.0          
+Jinja2==3.1.4          
+matplotlib==3.9.3  
+numpy==2.2.0         
+pandas==2.2.3         
+scikit-learn==1.6.0     
+scipy==1.14.1           
+seaborn==0.13.2        
+requests==2.32.3        
+plotly==5.24.1       
+torch==2.5.1+cpu     
+ipykernel==6.29.5      
+ipython==8.30.0       
+jupyterlab==4.3.3
+python3==3.12.1     
