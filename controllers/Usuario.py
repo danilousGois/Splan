@@ -7,7 +7,6 @@ from flask_login import login_user, logout_user, login_required
 
 user_bp = Blueprint('usuario', __name__, template_folder='templates')
 
- 
 @user_bp.route('/cadastro', methods=['POST', 'GET'])
 def criar_usuario():
     if request.method == 'GET':
