@@ -81,8 +81,14 @@ def update_user():
     user.nome = request.form['nome']
     user.email = request.form['email']
     user.telefone = request.form['telefone']
-    user.senha = request.form['senhaNew']
+    senha = request.form['novasenha']
+    confirmarsenha = request.form['confirmacaonovasenha']
 
+    if senha != confirmarsenha:
+        flash('Nova senha e confirmação não são iguais!')
+        return redirect(url_for('update_user'))
+
+    user.senha = hashlib.sha256(senha.encode()).hexdigest()
     session['user'] = user.nome
 
     db.session.add(user)

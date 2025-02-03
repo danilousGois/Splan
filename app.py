@@ -47,6 +47,7 @@ def index():
 
 
 
+<<<<<<< HEAD
 
 # def carregar_materias():
 #    if os.path.exists('static/materias.json'):
@@ -197,3 +198,7 @@ def formulario():
 
 # if __name__ == "__main__":
 #    app.run(debug=True)
+=======
+if __name__ == "__main__":
+    app.run(debug=True)
+>>>>>>> c3923e3 (mudanças no controller.usuario)

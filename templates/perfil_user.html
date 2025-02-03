@@ -27,20 +27,35 @@
             <div class="content-singup d-flex flex-column gap-3">
                 <div class="div_input p-3 py-2 d-flex gap-3 align-items-center">
                     <i class="fa-solid fa-user"></i>
+<<<<<<< HEAD
                     <input class="form-control bg-transparent border-0" name='nome' type="text" value="{{user.nome}}" />
+=======
+                    <input class="form-control bg-transparent border-0" name='nome' type="text" value="{{user.nome}}" required
+                        aria-label="default input">
+>>>>>>> c3923e3 (mudanças no controller.usuario)
                 </div>
                 <div class="div_input p-3 py-2 d-flex gap-3 align-items-center">
                     <i class="fa-solid fa-envelope"></i>
+<<<<<<< HEAD
                     <input class="form-control bg-transparent border-0" name='email' type="text" value="{{user.email}}" />
+=======
+                    <input class="form-control bg-transparent border-0" name='email' type="text" value="{{user.email}}" required
+                        aria-label="default input">
+>>>>>>> c3923e3 (mudanças no controller.usuario)
                 </div>
                 <div class="div_input p-3 py-2 d-flex gap-3 align-items-center">
                     <i class="fa-solid fa-phone"></i>
-                    <input class="form-control bg-transparent border-0" name="telefone" type="tel"
+                    <input class="form-control bg-transparent border-0" name="telefone" type="tel" required
                         value="{{user.telefone}}" aria-label="default input">
                 </div>
                 <div class="div_input p-3 py-2 d-flex gap-3 align-items-center">
                     <i class="fa-solid fa-lock"></i>
-                    <input class="form-control bg-transparent border-0" name="senhaNew" type="password"
+                    <input class="form-control bg-transparent border-0" name="novasenha" type="password" required
+                        placeholder="Nova Senha" aria-label="default input">
+                </div>
+                <div class="div_input p-3 d-flex gap-3 align-items-center">
+                    <i class="fa-solid fa-lock"></i>
+                    <input class="form-control bg-transparent border-0" name="confirmacaonovasenha" type="password" required
                         placeholder="Nova Senha" aria-label="default input">
                 </div>
                 <button type="submit" class="p-3 rounded-5 fw-semibold btn_cadastro border-1 m-auto mt-3 border-none w-100">ALTERAR</button>
