@@ -259,6 +259,14 @@ footer p {
     max-width: 300px;
     width: 100%;
 }
+.user-aluno{
+    border: 2px solid #0E9094;
+    width: 100%;
+}
+
+.box-user-aluno{
+    max-width: 650px;
+}
 
 .button-delete {
     background-color: #FF0000;

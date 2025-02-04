@@ -156,10 +156,19 @@ def logout():
    resp = make_response(redirect('/autenticar'))
    return resp
 
-@app.route('/gerenciar_usuarios')
+def carregar_usuarios():
+   with open("static/dados_usuario.json", "r", encoding="utf-8") as file:
+      return json.load(file)
+
+@app.route("/gerenciar_usuarios")
 def base_adm():
-   nomeuser = session['nomeuser']
-   return render_template('gerenciar_usuario.html', nome=nomeuser)
+   if "nomeuser" not in session:
+      return "Usuário não autenticado", 401  # Retorna erro se não estiver logado
+
+   nomeuser = session["nomeuser"]  # Obtém o nome do usuário logado
+   usuarios = carregar_usuarios()  # Carrega todos os usuários
+
+   return render_template("gerenciar_usuario.html", nome=nomeuser, usuarios=usuarios)
 
 
 if __name__ == "__main__":
