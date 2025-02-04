@@ -40,8 +40,8 @@ def criar_usuario():
 
 
 @login_manager.user_loader
-def load_user():
-    usuario = Usuario.query.filter_by(id=session.id_usuario).first()
+def load_user(id_usuario):
+    usuario = Usuario.query.filter_by(id=id_usuario).first()
     return usuario
 
 
