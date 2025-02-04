@@ -156,6 +156,11 @@ def logout():
    resp = make_response(redirect('/autenticar'))
    return resp
 
+@app.route('/base_adm')
+def base_adm():
+   nomeuser = session['nomeuser']
+   return render_template('base_adm.html', nome=nomeuser)
+
 
 if __name__ == "__main__":
    app.run(debug=True)
