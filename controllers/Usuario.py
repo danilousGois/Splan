@@ -21,7 +21,7 @@ def criar_usuario():
 
     user_existente = Usuario.query.filter_by(email=email).first()
     if user_existente:
-        flash('Email já cadastrado!', 'warning')
+        flash('Email já cadastrado. Faça login!', 'warning')
         return render_template('login.html')
     elif senha != confirmarsenha:
         flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
@@ -36,7 +36,7 @@ def criar_usuario():
 
     session['user'] = user.nome
 
-    return render_template('base_landingpage.html', nome=user.nome)
+    return redirect(url_for('formulario.carregar_formulario'))
 
 
 @login_manager.user_loader
@@ -51,7 +51,7 @@ def load_user():
 def login_usuario():
     if request.method == 'GET':
         if 'user' in session:
-            return render_template('base_landingpage.html', nome=session['user'])
+            return render_template('onboarding.html', nome=session['user'])
         
         return render_template('login.html')
     
@@ -64,7 +64,7 @@ def login_usuario():
         hash_senha = hashlib.sha256(senha.encode()).hexdigest()
         if user.senha == hash_senha:
             session['user'] = user.nome
-            return render_template('base_landingpage.html', nome=session['user'])
+            return redirect(url_for('inicio'))
         else:
             flash('Senha incorreta!', 'warning')
             return render_template('login.html')

@@ -45,11 +45,9 @@ def index():
    return render_template('home.html')
 
 
-
-@app.route('/formulario')
-def formulario():
-   return render_template('formulario.html')
-
+@app.route('/inicio')
+def inicio():
+   return render_template('onboarding.html', nome=session['user'])
 
 
 if __name__ == "__main__":
