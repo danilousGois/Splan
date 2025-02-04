@@ -14,6 +14,7 @@ from controllers.Formulario import formulario_bp
 from controllers.Progresso import progresso_bp
 from controllers.Materia_peso import peso_bp
 from controllers.Materia import inserir_materia
+from models.Usuario import Usuario
 app = Flask(__name__)
 
 app.register_blueprint(user_bp, url_prefix='/usuario')
@@ -38,6 +39,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 login_manager.init_app(app)
+login_manager.login_view = "usuario.login_usuario"
+
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return Usuario.query.get(user_id)
 
 
 @app.route('/')
@@ -45,11 +51,9 @@ def index():
    return render_template('home.html')
 
 
-
-@app.route('/formulario')
-def formulario():
-   return render_template('formulario.html')
-
+@app.route('/inicio')
+def inicio():
+   return render_template('onboarding.html', nome=session['user'])
 
 
 if __name__ == "__main__":

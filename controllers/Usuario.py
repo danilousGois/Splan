@@ -21,23 +21,21 @@ def criar_usuario():
 
     user_existente = Usuario.query.filter_by(email=email).first()
     if user_existente:
-        flash('Email já cadastrado!', 'warning')
+        flash('Email já cadastrado. Faça login!', 'warning')
         return render_template('login.html')
     elif senha != confirmarsenha:
         flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
         return render_template('signup.html')
     
     hash_senha = hashlib.sha256(senha.encode()).hexdigest()
-
     user = Usuario(nome, telefone, email, hash_senha, tipo_user)
 
     db.session.add(user)
     db.session.commit()
 
+    # login_user(user, remember=True)
     session['user'] = user.nome
-
-    return render_template('base_landingpage.html', nome=user.nome)
-
+    return redirect(url_for('formulario.carregar_formulario'))
 
 @login_manager.user_loader
 def load_user(id_usuario):
@@ -46,11 +44,12 @@ def load_user(id_usuario):
 
 
 
+
 @user_bp.route('/login', methods=['POST', 'GET'])
 def login_usuario():
     if request.method == 'GET':
         if 'user' in session:
-            return render_template('base_landingpage.html', nome=session['user'])
+            return render_template('onboarding.html', nome=session['user'])
         
         return render_template('login.html')
     
@@ -63,7 +62,8 @@ def login_usuario():
         hash_senha = hashlib.sha256(senha.encode()).hexdigest()
         if user.senha == hash_senha:
             session['user'] = user.nome
-            return render_template('base_landingpage.html', nome=session['user'])
+            return redirect(url_for('inicio'))
+            # login_user(user, remember=True)
         else:
             flash('Senha incorreta!', 'warning')
             return render_template('login.html')
@@ -75,6 +75,7 @@ def login_usuario():
 
 
 @user_bp.route('/alterarperfil', methods=['POST'])
+# @login_required
 def update_user():
     user = Usuario.query.filter_by(nome=session['user']).first()
     user.nome = request.form['nome']
@@ -89,6 +90,7 @@ def update_user():
 
     user.senha = hashlib.sha256(senha.encode()).hexdigest()
     session['user'] = user.nome
+    login_user(user, remember=True)
 
     db.session.add(user)
     db.session.commit()
@@ -97,6 +99,7 @@ def update_user():
 
 
 @user_bp.route('/deletarperfil')
+# @login_required
 def deletar_user():
     user = Usuario.query.filter_by(nome=session['user']).first()
     db.session.delete(user)
@@ -112,6 +115,11 @@ def logoff():
 
 
 @user_bp.route('/perfil')
+# @login_required
 def carregar_perfil():
+    # if current_user.is_authenticated:
+    #     return 'true'
+    # return 'naooooo'
     user = Usuario.query.filter_by(nome=session['user']).first()
+    user = user = Usuario.query.filter_by(nome=session['user']).first()
     return render_template('perfil_user.html', user=user)
