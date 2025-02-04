@@ -31,15 +31,17 @@
                 <div class="mt-3">
                     <h5 class="mb-4">Quais matérias você vai estudar:</h5>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="portugues" name="materias[]"
+                        <input class="form-check-input" type="checkbox" id="portugues" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapsePortugues"
+                            aria-expanded="false" aria-controls="collapsePortugues" name="materias[]"
                             value="portugues">
                         <label class="form-check-label" for="portugues">Português</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapsePortugues">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" id="peeso1_portugues"
+                                <input class="form-check-input" type="radio" id="peso1_portugues"
                                     name="dificuldade_portugues" value="1">
-                                <label class="form-check-label" for="peeso1_portugues">Peso 1</label>
+                                <label class="form-check-label" for="peso1_portugues">Peso 1</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso2_portugues"
@@ -63,11 +65,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="matematica" name="materias[]"
+                        <input class="form-check-input" type="checkbox" id="matematica" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseMatematica"
+                            aria-expanded="false" aria-controls="collapseMatematica" name="materias[]"
                             value="matematica">
                         <label class="form-check-label" for="matematica">Matemática</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseMatematica">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_matematica"
@@ -98,10 +103,12 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="historia" name="materias[]"
+                        <input class="form-check-input" type="checkbox" id="historia" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseHistoria"
+                            aria-expanded="false" aria-controls="collapseHistoria" name="materias[]"
                             value="historia">
                         <label class="form-check-label" for="historia">História</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseHistoria">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_historia"
@@ -132,10 +139,12 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="filosofia" name="materias[]"
+                        <input class="form-check-input" type="checkbox" id="filosofia" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilosofia"
+                            aria-expanded="false" aria-controls="collapseFilosofia" name="materias[]"
                             value="filosofia">
                         <label class="form-check-label" for="filosofia">Filosofia</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseFilosofia">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_filosofia"
@@ -166,10 +175,12 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="sociologia" name="materias[]"
+                        <input class="form-check-input" type="checkbox" id="sociologia" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseSociologia"
+                            aria-expanded="false" aria-controls="collapseSociologia" name="materias[]"
                             value="sociologia">
                         <label class="form-check-label" for="sociologia">Sociologia</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseSociologia">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_sociologia"
@@ -199,11 +210,14 @@
                         </div>
                     </div>
 
+
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="espanhol" name="materias[]"
+                        <input class="form-check-input" type="checkbox" id="espanhol" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseEspanhol"
+                            aria-expanded="false" aria-controls="collapseEspanhol" name="materias[]"
                             value="espanhol">
                         <label class="form-check-label" for="espanhol">Espanhol</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseEspanhol">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_espanhol"
@@ -234,9 +248,12 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="fisica" name="materias[]" value="fisica">
+                        <input class="form-check-input" type="checkbox" id="fisica" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseFisica"
+                            aria-expanded="false" aria-controls="collapseFisica" name="materias[]"
+                            value="fisica">
                         <label class="form-check-label" for="fisica">Física</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseFisica">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_fisica" name="dificuldade_fisica"
@@ -267,9 +284,12 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="quimica" name="materias[]" value="quimica">
+                        <input class="form-check-input" type="checkbox" id="quimica" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuimica"
+                            aria-expanded="false" aria-controls="collapseQuimica" name="materias[]"
+                            value="quimica">
                         <label class="form-check-label" for="quimica">Química</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseQuimica">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_quimica"
@@ -299,10 +319,13 @@
                         </div>
                     </div>
 
+
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="artes" name="materias[]" value="artes">
+                        <input class="form-check-input" type="checkbox" id="artes" class="btn btn-primary" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseArtes" aria-expanded="false"
+                            aria-controls="collapseArtes" name="materias[]" value="artes">
                         <label class="form-check-label" for="artes">Artes</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseArtes">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_artes" name="dificuldade_artes"
@@ -333,10 +356,12 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="edu_fisica" name="materias[]"
+                        <input class="form-check-input" type="checkbox" id="edu_fisica" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseEduFisica"
+                            aria-expanded="false" aria-controls="collapseEduFisica" name="materias[]"
                             value="edu_fisica">
                         <label class="form-check-label" for="edu_fisica">Edu. Física</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseEduFisica">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_edu_fisica"
@@ -367,10 +392,12 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="biologia" name="materias[]"
+                        <input class="form-check-input" type="checkbox" id="biologia" class="btn btn-primary"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseBiologia"
+                            aria-expanded="false" aria-controls="collapseBiologia" name="materias[]"
                             value="biologia">
                         <label class="form-check-label" for="biologia">Biologia</label>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 collapse" id="collapseBiologia">
                             <label class="form-label">Dificuldade na matéria:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="peso1_biologia"
