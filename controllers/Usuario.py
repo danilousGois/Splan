@@ -7,6 +7,16 @@ from flask_login import login_user, logout_user, login_required
 
 user_bp = Blueprint('usuario', __name__, template_folder='templates')
 
+
+@login_manager.user_loader
+def load_user(user_id):
+    print(f"🔍 Tentando carregar usuário com ID: {user_id}")
+    if not user_id:
+        return None  
+    return Usuario.query.get(user_id)
+
+
+
 @user_bp.route('/cadastro', methods=['POST', 'GET'])
 def criar_usuario():
     if request.method == 'GET':
@@ -33,14 +43,8 @@ def criar_usuario():
     db.session.add(user)
     db.session.commit()
 
-    # login_user(user, remember=True)
-    session['user'] = user.nome
+    login_user(user)
     return redirect(url_for('formulario.carregar_formulario'))
-
-@login_manager.user_loader
-def load_user(id_usuario):
-    usuario = Usuario.query.filter_by(id=id_usuario).first()
-    return usuario
 
 
 
@@ -48,9 +52,8 @@ def load_user(id_usuario):
 @user_bp.route('/login', methods=['POST', 'GET'])
 def login_usuario():
     if request.method == 'GET':
-        if 'user' in session:
-            return render_template('onboarding.html', nome=session['user'])
-        
+        if current_user.is_authenticated:
+            return redirect(url_for('inicio'))
         return render_template('login.html')
     
     email = request.form['email']
@@ -61,9 +64,9 @@ def login_usuario():
     if user:
         hash_senha = hashlib.sha256(senha.encode()).hexdigest()
         if user.senha == hash_senha:
-            session['user'] = user.nome
+            login_user(user)
+            print(f'Usuário logado: {user.id}')
             return redirect(url_for('inicio'))
-            # login_user(user, remember=True)
         else:
             flash('Senha incorreta!', 'warning')
             return render_template('login.html')
@@ -73,11 +76,13 @@ def login_usuario():
     
 
 
-
+#falta fazer verificação de senha e confirmação(botar flash card no html), se os valores nao sao iguais... 
 @user_bp.route('/alterarperfil', methods=['POST'])
-# @login_required
+@login_required
 def update_user():
-    user = Usuario.query.filter_by(nome=session['user']).first()
+    if request.method == 'GET':
+        return render_template('perfil_user.html')
+    user = Usuario.query.filter_by(nome=current_user.nome).first()
     user.nome = request.form['nome']
     user.email = request.form['email']
     user.telefone = request.form['telefone']
@@ -86,16 +91,15 @@ def update_user():
 
     if senha != confirmarsenha:
         flash('Nova senha e confirmação não são iguais!')
-        return redirect(url_for('update_user'))
+        return redirect(url_for('usuario.update_user'))
 
     user.senha = hashlib.sha256(senha.encode()).hexdigest()
-    session['user'] = user.nome
-    login_user(user, remember=True)
+    login_user(user)
 
     db.session.add(user)
     db.session.commit()
     
-    return render_template('base_landingpage.html', nome=session['user'])
+    return redirect(url_for('inicio'))
 
 @user_bp.route('/cronograma')
 # @login_required
@@ -103,9 +107,12 @@ def show_cronograma():
     return render_template('cronograma.html', nome=session['user'])
 
 @user_bp.route('/deletarperfil')
-# @login_required
+@login_required
 def deletar_user():
-    user = Usuario.query.filter_by(nome=session['user']).first()
+    if not current_user.is_authenticated:
+        return redirect(url_for("login")) 
+    user = current_user
+    logout_user()
     db.session.delete(user)
     db.session.commit()
     session.pop('user', None)
@@ -113,17 +120,18 @@ def deletar_user():
 
 
 @user_bp.route('/logoff')
+@login_required
 def logoff():
-    session.pop('user', None)
+    if not current_user.is_authenticated:
+        return redirect(url_for("login")) 
+    logout_user() 
+    session.clear()
     return redirect(url_for('index'))
 
 
 @user_bp.route('/perfil')
-# @login_required
+@login_required
 def carregar_perfil():
-    # if current_user.is_authenticated:
-    #     return 'true'
-    # return 'naooooo'
-    user = Usuario.query.filter_by(nome=session['user']).first()
-    user = user = Usuario.query.filter_by(nome=session['user']).first()
+    print(current_user)
+    user = current_user
     return render_template('perfil_user.html', user=user)
