@@ -97,6 +97,10 @@ def update_user():
     
     return render_template('base_landingpage.html', nome=session['user'])
 
+@user_bp.route('/cronograma')
+# @login_required
+def show_cronograma():
+    return render_template('cronograma.html', nome=session['user'])
 
 @user_bp.route('/deletarperfil')
 # @login_required
