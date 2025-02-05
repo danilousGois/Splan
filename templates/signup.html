@@ -39,8 +39,8 @@
                     <input class="form-control bg-transparent border-0" name='email' type="text" placeholder="Email"
                         aria-label="default input" required>
                 </div>
-                <div class="div_input p-3 d-flex gap-4 align-items-center"> 
-                    <i class="fa-solid fa-envelope"></i>
+                <div class="div_input p-3 py-2 d-flex gap-3 align-items-center"> 
+                    <i class="fa-solid fa-phone"></i>
                     <input class="form-control bg-transparent border-0" name='telefone' type="text" placeholder="Telefone"
                         aria-label="default input" required>
                 </div>
@@ -55,7 +55,8 @@
                         placeholder="Confirm Password" aria-label="default input" required>
                 </div>
                 <div>
-                    <select name="tipo_user">
+                    <select class="form-select form-select-criar-user bg-body-tertiary" aria-label="Default select example" name="tipo_user">
+                        <option selected disabled>Selecione um cargo</option>
                         <option value="adm">Administrador</option>
                         <option value="comum">Usuário padrão</option>
                     </select>
