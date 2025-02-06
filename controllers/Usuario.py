@@ -22,8 +22,7 @@ def load_user(user_id):
 def criar_usuario():
     if request.method == 'GET':
         return render_template('signup.html')
-
-    
+ 
     nome = request.form['nome']
     telefone = request.form['telefone']
     senha = request.form['senha']
@@ -45,7 +44,7 @@ def criar_usuario():
         return render_template('login.html')
     elif senha != confirmarsenha:
         flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
-        return render_template('signup.html')
+        return redirect(url_for('usuario.criar_usuario'))
     
     hash_senha = hashlib.sha256(senha.encode()).hexdigest()
     user = Usuario(nome, telefone, email, hash_senha, tipo_user)
@@ -54,9 +53,6 @@ def criar_usuario():
     login_user(user)
     return redirect(url_for('formulario.carregar_formulario'))
     
-
-
-
 
 
 @user_bp.route('/login', methods=['POST', 'GET'])
@@ -75,40 +71,52 @@ def login_usuario():
         hash_senha = hashlib.sha256(senha.encode()).hexdigest()
         if user.senha == hash_senha:
             login_user(user)
-            print(f'Usuário logado: {user.id}')
+            # print(f'Usuário logado: {user.id}')
             return redirect(url_for('inicio'))
         else:
             flash('Senha incorreta!', 'warning')
-            return render_template('login.html')
+            return redirect(url_for('usuario.login_usuario'))
     else:
-        flash('There is no user bounded with this email', 'warning')
-        return render_template('login.html')
+        flash('Email inválido!', 'warning')
+        return redirect(url_for('usuario.login_usuario'))
     
 
-
-#falta fazer verificação de senha e confirmação(botar flash card no html), se os valores nao sao iguais... 
+#fazer funcionalidade de exigir login para poder fazer update
 @user_bp.route('/alterarperfil', methods=['POST'])
 @login_required
 def update_user():
     if request.method == 'GET':
         return redirect(url_for('usuario.carregar_perfil'))
     user = current_user
-
-    if request.form['nome'] == user.nome and request.form['email'] == user.email and request.form['telefone'] == user.telefone and request.form['novasenha'] == user.senha and request.form['novasenha'] == request.form['confirmacaonovasenha']:
+    
+    senha = hashlib.sha256(request.form['novasenha'].encode()).hexdigest()
+    confirmacaosenha = hashlib.sha256(request.form['confirmacaonovasenha'].encode()).hexdigest()
+    if request.form['nome'] == user.nome and request.form['email'] == user.email and request.form['telefone'] == user.telefone and senha == user.senha and senha == confirmacaosenha:
         flash('Nenhuma informação foi atualizada!', 'warning')
         return redirect(url_for('usuario.carregar_perfil'))
+
     if request.form['nome'] != user.nome:
         user.nome = request.form['nome']
-    if request.form['email'] != user.email:
-        user.email = request.form['email']
-    if request.form['telefone'] != user.telefone:
-        user.telefone = request.form['telefone']
-    if request.form['novasenha'] != user.senha:
-        if request.form['novasenha'] == request.form['confirmacaonovasenha']:
-            user.senha = hashlib.sha256(request.form['novasenha'].encode()).hexdigest()
 
-        flash('Nova senha e confirmação não são iguais!')
+    if request.form['email'] != user.email:
+        if validar_email(request.form['email']) != True:
+            flash('Email inválido!', 'warning')
+            return redirect(url_for('usuario.carregar_perfil'))
+        user.email = request.form['email']
+
+    if request.form['telefone'] != user.telefone:
+        if validar_telefone(request.form['telefone']) != True:
+            flash('Telefone inválido!', 'warning')
+            return redirect(url_for('usuario.carregar_perfil'))
+        user.telefone = request.form['telefone']
+
+    
+    if senha != user.senha:
+        if senha == confirmacaosenha:
+            user.senha = senha
+        flash('Senha e confirmação não são iguais', 'warning')
         return redirect(url_for('usuario.carregar_perfil'))
+            
 
     db.session.add(user)
     db.session.commit()

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, make_response, session
+from flask import Flask, render_template, request, flash, redirect, make_response, session, url_for
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, declarative_base
 import json
@@ -38,8 +38,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 migrate = Migrate(app, db)
+
+#flask login
 login_manager.init_app(app)
 login_manager.login_view = "usuario.login_usuario"
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    flash("Por favor, faça login para acessar esta página!", 'warning')
+    return redirect(url_for('usuario.login_usuario'))
 
 
 
@@ -60,10 +67,10 @@ def carregar_cronograma():
    return render_template('cronograma.html')
 
 
-@app.route('/debug_session')
-def debug_session():
-    from flask import session
-    return f"Session _user_id: {session.get('_user_id')}"
+# @app.route('/debug_session')
+# def debug_session():
+#     from flask import session
+#     return f"Session _user_id: {session.get('_user_id')}"
 
 
 if __name__ == "__main__":
