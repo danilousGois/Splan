@@ -2,6 +2,7 @@ from utils import db, login_manager
 from flask_login import UserMixin
 from flask_login import current_user
 from flask_login import login_user, logout_user, login_required
+import hashlib
 
 
 
