@@ -11,6 +11,7 @@ user_bp = Blueprint('usuario', __name__, template_folder='templates')
 
 @login_manager.user_loader
 def load_user(user_id):
+    # print(f"Tentando carregar usuário com ID: {user_id}")
     if not user_id:
         return None  
     return Usuario.query.get(user_id)
@@ -80,6 +81,7 @@ def login_usuario():
         return redirect(url_for('usuario.login_usuario'))
     
 
+#fazer funcionalidade de exigir login para poder fazer update
 @user_bp.route('/alterarperfil', methods=['POST'])
 @login_required
 def update_user():
@@ -121,10 +123,6 @@ def update_user():
     
     return redirect(url_for('inicio'))
 
-@user_bp.route('/cronograma')
-@login_required
-def show_cronograma():
-    return render_template('cronograma.html', nome=session['user'])
 
 @user_bp.route('/deletarperfil')
 @login_required
