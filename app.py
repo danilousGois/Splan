@@ -42,10 +42,6 @@ login_manager.init_app(app)
 login_manager.login_view = "usuario.login_usuario"
 
 
-# @app.context_processor
-# def inject_user():
-#     return {"nome": session['user']}
-
 
 @app.route('/')
 def index():

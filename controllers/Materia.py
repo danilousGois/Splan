@@ -11,3 +11,12 @@ def listar_assuntos(materia):
     # lista_assuntos = Assunto.query.filter_by(id_materia=materia_objeto.id_materia).all()
     # return lista_assuntos
     return f'Olá, voce acaba de acessar a matéria de {materia}'
+
+
+# @materia_bp.route('/inserir_materias')
+# def inserir_materias():
+#    materias = ['matematica', 'portugues', 'fisica', 'quimica','biologia', 'geografia', 'historia', 'literatura', 'artes', 'filosofia', 'sociologia', 'ingles']
+#    for mat in materias:
+#       materia = Materia(mat)
+#       db.session.add(materia)
+#       db.session.commit()
