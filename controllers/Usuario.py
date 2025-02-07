@@ -51,6 +51,9 @@ def criar_usuario():
     db.session.add(user)
     db.session.commit()
     login_user(user)
+    
+    if current_user.tipo_user == 'adm':
+        return redirect(url_for('dashboard_adm'))
     return redirect(url_for('formulario.carregar_formulario'))
     
 
@@ -72,6 +75,8 @@ def login_usuario():
         if user.senha == hash_senha:
             login_user(user)
             # print(f'Usuário logado: {user.id}')
+            if current_user.tipo_user == 'adm':
+                return render_template('base_adm.html')
             return redirect(url_for('inicio'))
         else:
             flash('Senha incorreta!', 'warning')

@@ -24,7 +24,7 @@
                     <div class="user-info border-bottom pb-4 d-flex align-items-center gap-3 border-dark-subtle">
                         <img src="{{ url_for('static', filename='img/user.svg') }}" alt="">
                         <span class="text-decoration-none text-dark">
-                            {{nome}}
+                            {{current_user.nome}}
                         </span>
                     </div>
                 </a>
@@ -36,7 +36,7 @@
                         </span>
                     </div>
                 </a>
-                <a href="{{url_for('logout')}}" class="text-danger mt-auto align-items-end mt-auto d-inline-block text-decoration-none"><i
+                <a href="{{url_for('usuario.logoff')}}" class="text-danger mt-auto align-items-end mt-auto d-inline-block text-decoration-none"><i
                         class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sair</span></a>
             </div>
             <div class="icon-chevron">

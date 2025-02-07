@@ -12,7 +12,6 @@ from controllers.Conteudo import conteudo_bp
 from controllers.Formulario import formulario_bp
 from controllers.Progresso import progresso_bp
 from controllers.Materia_peso import peso_bp
-from flask_login import current_user
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
@@ -65,6 +64,12 @@ def inicio():
 @login_required
 def carregar_cronograma():
    return render_template('cronograma.html')
+
+
+@app.route('/dashboardadministrador')
+@login_required
+def dashboard_adm():
+   return render_template('base_adm.html')
 
 
 # @app.route('/debug_session')
