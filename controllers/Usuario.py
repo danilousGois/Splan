@@ -1,23 +1,42 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, make_response, session, Blueprint
 from models.Usuario import Usuario
-from utils import db, login_manager
+from utils import db, login_manager, validar_email, validar_telefone
 import hashlib
 from flask_login import current_user
 from flask_login import login_user, logout_user, login_required
+import re
 
 user_bp = Blueprint('usuario', __name__, template_folder='templates')
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    # print(f"Tentando carregar usuário com ID: {user_id}")
+    if not user_id:
+        return None  
+    return Usuario.query.get(user_id)
+
+
 
 @user_bp.route('/cadastro', methods=['POST', 'GET'])
 def criar_usuario():
     if request.method == 'GET':
         return render_template('signup.html')
-
+ 
     nome = request.form['nome']
-    email = request.form['email']
     telefone = request.form['telefone']
     senha = request.form['senha']
     confirmarsenha = request.form['confirmarsenha']
     tipo_user = request.form['tipo_user']
+    email = request.form['email']
+
+    if validar_email(email) != True:
+        flash('Email inválido!', 'warning')
+        return redirect(url_for('usuario.criar_usuario'))
+    
+    if validar_telefone(telefone) != True:
+        flash('Telefone inválido!', 'warning')
+        return redirect(url_for('usuario.criar_usuario'))
 
     user_existente = Usuario.query.filter_by(email=email).first()
     if user_existente:
@@ -25,32 +44,22 @@ def criar_usuario():
         return render_template('login.html')
     elif senha != confirmarsenha:
         flash('Senha e confirmação de senha precisam ser iguais!', 'warning')
-        return render_template('signup.html')
+        return redirect(url_for('usuario.criar_usuario'))
     
     hash_senha = hashlib.sha256(senha.encode()).hexdigest()
     user = Usuario(nome, telefone, email, hash_senha, tipo_user)
-
     db.session.add(user)
     db.session.commit()
-
-    # login_user(user, remember=True)
-    session['user'] = user.nome
+    login_user(user)
     return redirect(url_for('formulario.carregar_formulario'))
-
-@login_manager.user_loader
-def load_user(id_usuario):
-    usuario = Usuario.query.filter_by(id=id_usuario).first()
-    return usuario
-
-
+    
 
 
 @user_bp.route('/login', methods=['POST', 'GET'])
 def login_usuario():
     if request.method == 'GET':
-        if 'user' in session:
-            return render_template('onboarding.html', nome=session['user'])
-        
+        if current_user.is_authenticated:
+            return redirect(url_for('inicio'))
         return render_template('login.html')
     
     email = request.form['email']
@@ -61,51 +70,67 @@ def login_usuario():
     if user:
         hash_senha = hashlib.sha256(senha.encode()).hexdigest()
         if user.senha == hash_senha:
-            session['user'] = user.nome
+            login_user(user)
+            # print(f'Usuário logado: {user.id}')
             return redirect(url_for('inicio'))
-            # login_user(user, remember=True)
         else:
             flash('Senha incorreta!', 'warning')
-            return render_template('login.html')
+            return redirect(url_for('usuario.login_usuario'))
     else:
-        flash('There is no user bounded with this email', 'warning')
-        return render_template('login.html')
+        flash('Email inválido!', 'warning')
+        return redirect(url_for('usuario.login_usuario'))
     
 
-
-
+#fazer funcionalidade de exigir login para poder fazer update
 @user_bp.route('/alterarperfil', methods=['POST'])
-# @login_required
+@login_required
 def update_user():
-    user = Usuario.query.filter_by(nome=session['user']).first()
-    user.nome = request.form['nome']
-    user.email = request.form['email']
-    user.telefone = request.form['telefone']
-    senha = request.form['novasenha']
-    confirmarsenha = request.form['confirmacaonovasenha']
+    if request.method == 'GET':
+        return redirect(url_for('usuario.carregar_perfil'))
+    user = current_user
+    
+    senha = hashlib.sha256(request.form['novasenha'].encode()).hexdigest()
+    confirmacaosenha = hashlib.sha256(request.form['confirmacaonovasenha'].encode()).hexdigest()
+    if request.form['nome'] == user.nome and request.form['email'] == user.email and request.form['telefone'] == user.telefone and senha == user.senha and senha == confirmacaosenha:
+        flash('Nenhuma informação foi atualizada!', 'warning')
+        return redirect(url_for('usuario.carregar_perfil'))
 
-    if senha != confirmarsenha:
-        flash('Nova senha e confirmação não são iguais!')
-        return redirect(url_for('update_user'))
+    if request.form['nome'] != user.nome:
+        user.nome = request.form['nome']
 
-    user.senha = hashlib.sha256(senha.encode()).hexdigest()
-    session['user'] = user.nome
-    login_user(user, remember=True)
+    if request.form['email'] != user.email:
+        if validar_email(request.form['email']) != True:
+            flash('Email inválido!', 'warning')
+            return redirect(url_for('usuario.carregar_perfil'))
+        user.email = request.form['email']
+
+    if request.form['telefone'] != user.telefone:
+        if validar_telefone(request.form['telefone']) != True:
+            flash('Telefone inválido!', 'warning')
+            return redirect(url_for('usuario.carregar_perfil'))
+        user.telefone = request.form['telefone']
+
+    
+    if senha != user.senha:
+        if senha == confirmacaosenha:
+            user.senha = senha
+        flash('Senha e confirmação não são iguais', 'warning')
+        return redirect(url_for('usuario.carregar_perfil'))
+            
 
     db.session.add(user)
     db.session.commit()
     
-    return render_template('base_landingpage.html', nome=session['user'])
+    return redirect(url_for('inicio'))
 
-@user_bp.route('/cronograma')
-# @login_required
-def show_cronograma():
-    return render_template('cronograma.html', nome=session['user'])
 
 @user_bp.route('/deletarperfil')
-# @login_required
+@login_required
 def deletar_user():
-    user = Usuario.query.filter_by(nome=session['user']).first()
+    if not current_user.is_authenticated:
+        return redirect(url_for("login")) 
+    user = current_user
+    logout_user()
     db.session.delete(user)
     db.session.commit()
     session.pop('user', None)
@@ -113,17 +138,17 @@ def deletar_user():
 
 
 @user_bp.route('/logoff')
+@login_required
 def logoff():
-    session.pop('user', None)
+    if not current_user.is_authenticated:
+        return redirect(url_for("login")) 
+    logout_user() 
+    session.clear()
     return redirect(url_for('index'))
 
 
 @user_bp.route('/perfil')
-# @login_required
+@login_required
 def carregar_perfil():
-    # if current_user.is_authenticated:
-    #     return 'true'
-    # return 'naooooo'
-    user = Usuario.query.filter_by(nome=session['user']).first()
-    user = user = Usuario.query.filter_by(nome=session['user']).first()
-    return render_template('perfil_user.html', user=user)
+    print(current_user)
+    return render_template('perfil_user.html', user=current_user)

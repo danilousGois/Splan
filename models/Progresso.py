@@ -5,7 +5,7 @@ class Progresso(db.Model):
     id_progresso = db.Column(db.Integer, primary_key = True, autoincrement = True)
     concluido = db.Column(db.Integer)
     tempo_estudado = db.Column(db.Float)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'))
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     id_assunto = db.Column(db.Integer, db.ForeignKey('assunto.id_assunto'))
 
     usuario = db.relationship('Usuario', foreign_keys=id_usuario)

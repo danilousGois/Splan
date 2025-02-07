@@ -13,7 +13,8 @@ def carregar_formulario():
    return render_template('formulario.html')
 
 
-@formulario_bp.route('/receberformulario')
+@formulario_bp.route('/receberformulario', methods=['POST'])
 @login_required
 def receber_formulario():
-   return 'forms recebido'
+   flash('forms recebido')
+   return redirect(url_for('inicio'))

@@ -1,8 +1,8 @@
-"""inicializando bd
+"""recriando banco
 
-Revision ID: 704d704292dd
+Revision ID: fc79b18fe85f
 Revises: 
-Create Date: 2025-01-24 07:21:14.458531
+Create Date: 2025-02-04 23:05:41.875299
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '704d704292dd'
+revision = 'fc79b18fe85f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,13 +24,14 @@ def upgrade():
     sa.PrimaryKeyConstraint('id_materia')
     )
     op.create_table('usuario',
-    sa.Column('id_usuario', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('nome', sa.String(length=200), nullable=True),
     sa.Column('telefone', sa.String(length=20), nullable=True),
     sa.Column('email', sa.String(length=200), nullable=True),
     sa.Column('senha', sa.String(length=200), nullable=True),
     sa.Column('tipo_user', sa.Integer(), nullable=True),
-    sa.PrimaryKeyConstraint('id_usuario')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email')
     )
     op.create_table('assunto',
     sa.Column('id_assunto', sa.Integer(), autoincrement=True, nullable=False),
@@ -44,7 +45,7 @@ def upgrade():
     sa.Column('id_formulario', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('id_usuario', sa.Integer(), nullable=True),
     sa.Column('tempo_total', sa.Float(), nullable=True),
-    sa.ForeignKeyConstraint(['id_usuario'], ['usuario.id_usuario'], ),
+    sa.ForeignKeyConstraint(['id_usuario'], ['usuario.id'], ),
     sa.PrimaryKeyConstraint('id_formulario')
     )
     op.create_table('conteudo',
@@ -70,7 +71,7 @@ def upgrade():
     sa.Column('id_usuario', sa.Integer(), nullable=True),
     sa.Column('id_assunto', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['id_assunto'], ['assunto.id_assunto'], ),
-    sa.ForeignKeyConstraint(['id_usuario'], ['usuario.id_usuario'], ),
+    sa.ForeignKeyConstraint(['id_usuario'], ['usuario.id'], ),
     sa.PrimaryKeyConstraint('id_progresso')
     )
     # ### end Alembic commands ###
