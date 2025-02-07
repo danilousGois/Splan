@@ -2,16 +2,16 @@ from utils import db, login_manager
 from flask_login import UserMixin
 from flask_login import current_user
 from flask_login import login_user, logout_user, login_required
-import hashlib
 
 
 
 class Usuario(db.Model, UserMixin):
     __tablename__='usuario'
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True) 
+    id = db.Column(db.Integer, autoincrement=True)
+    id_usuario = db.Column(db.Integer, primary_key = True, autoincrement=True) 
     nome = db.Column(db.String(200))
     telefone = db.Column(db.String(20))
-    email = db.Column(db.String(200), unique=True)
+    email = db.Column(db.String(200))
     senha = db.Column(db.String(200))
     tipo_user = db.Column(db.Integer)
 

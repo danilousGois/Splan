@@ -20,15 +20,8 @@
             </a>
         </div>
     </div>
-    
+
     <div class="w-100">
-        {% set mensagens = get_flashed_messages(with_categories=true) %}
-        
-        {% if mensagens %}
-            {% for tipo, msg in mensagens %}
-                <div class="alert alert-{{tipo}}" role="alert">{{msg}}</div>
-            {% endfor %}
-        {% endif %}
         <h2 class="mt-5">Alterações de dados</h2>
         <form action="{{url_for('usuario.update_user')}}" method="post" class="form-sign-up mt-4">
             <div class="content-singup d-flex flex-column gap-3">

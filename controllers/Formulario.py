@@ -8,11 +8,12 @@ formulario_bp = Blueprint('formulario', __name__, template_folder='templates')
 
 
 @formulario_bp.route('/responder')
+@login_required
 def carregar_formulario():
    return render_template('formulario.html')
 
 
-@formulario_bp.route('/receberformulario', methods=['POST'])
+@formulario_bp.route('/receberformulario')
+@login_required
 def receber_formulario():
-   flash('forms recebido')
-   return redirect(url_for('inicio'))
+   return 'forms recebido'
