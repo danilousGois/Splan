@@ -45,8 +45,8 @@ login_manager.login_view = "usuario.login_usuario"
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    flash("Por favor, faça login para acessar esta página!", 'warning')
-    return redirect(url_for('usuario.login_usuario'))
+   flash("Por favor, faça login para acessar esta página!", 'warning')
+   return redirect(url_for('usuario.login_usuario'))
 
 
 
