@@ -3,7 +3,7 @@ from utils import db
 class Formulario(db.Model):
     __tablename__='formulario'
     id_formulario = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'))
     tempo_total = db.Column(db.Float)
 
     usuario = db.relationship('Usuario', foreign_keys=id_usuario)

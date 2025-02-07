@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, flash, redirect, make_response, session, url_for
+from flask import Flask, render_template, request, flash, redirect, make_response, session
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, declarative_base
 import json
 import os
 from flask_migrate import Migrate
 from utils import db, login_manager
+import uuid
 from controllers.Usuario import user_bp
 from controllers.Materia import materia_bp
 from controllers.Assunto import assunto_bp
@@ -12,9 +13,8 @@ from controllers.Conteudo import conteudo_bp
 from controllers.Formulario import formulario_bp
 from controllers.Progresso import progresso_bp
 from controllers.Materia_peso import peso_bp
-from flask_login import current_user
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-
+from controllers.Materia import inserir_materia
+from models.Usuario import Usuario
 app = Flask(__name__)
 
 app.register_blueprint(user_bp, url_prefix='/usuario')
@@ -38,16 +38,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 migrate = Migrate(app, db)
-
-#flask login
 login_manager.init_app(app)
 login_manager.login_view = "usuario.login_usuario"
 
-@login_manager.unauthorized_handler
-def unauthorized():
-    flash("Por favor, faça login para acessar esta página!", 'warning')
-    return redirect(url_for('usuario.login_usuario'))
-
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return Usuario.query.get(user_id)
 
 
 @app.route('/')
@@ -55,22 +51,9 @@ def index():
    return render_template('home.html')
 
 
-@app.route('/dashboard')
-@login_required
+@app.route('/inicio')
 def inicio():
-   return render_template('onboarding.html')
-
-
-@app.route('/cronograma')
-@login_required
-def carregar_cronograma():
-   return render_template('cronograma.html')
-
-
-# @app.route('/debug_session')
-# def debug_session():
-#     from flask import session
-#     return f"Session _user_id: {session.get('_user_id')}"
+   return render_template('onboarding.html', nome=session['user'])
 
 def carregar_usuarios():
    with open("static/dados_usuario.json", "r", encoding="utf-8") as file:
