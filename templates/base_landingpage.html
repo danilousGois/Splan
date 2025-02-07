@@ -45,22 +45,34 @@
                         </span>
                     </div>
                     <ul class="collapse lista__materias" id="materiasSubmenu">
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='matemática')}}" >Matemática</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='física')}}" >Física</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='química')}}" >Química</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='português')}}" >Português</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='biologia')}}" >Biologia</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='história')}}" >História</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='geografia')}}" >Geografia</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='filosofia')}}" >Filosofia</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='sociologia')}}" >Sociologia</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='inglês')}}" >Inglês</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='literatura')}}" >Literatura</a></li>
-                        <li><a class="text-black" href="{{url_for('materia.listar_assuntos', materia='artes')}}" >Artes</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='matemática')}}">Matemática</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='física')}}">Física</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='química')}}">Química</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='português')}}">Português</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='biologia')}}">Biologia</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='história')}}">História</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='geografia')}}">Geografia</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='filosofia')}}">Filosofia</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='sociologia')}}">Sociologia</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='inglês')}}">Inglês</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='literatura')}}">Literatura</a></li>
+                        <li><a class="text-black"
+                                href="{{url_for('materia.listar_assuntos', materia='artes')}}">Artes</a></li>
 
                     </ul>
                 </div>
-                <div class="funcionalidade d-flex align-items-center gap-3">
+                <!-- <div class="funcionalidade d-flex align-items-center gap-3">
                     <img src="{{ url_for('static', filename='img/grafico-icon.svg') }}" alt="">
                     <span class="name_funcionalidade">
                         Gráfico
@@ -77,8 +89,10 @@
                     <span class="name_funcionalidade">
                         Pesquisa
                     </span>
-                </div>
-                <a href="{{url_for('usuario.logoff')}}" class="text-danger mt-auto align-items-end mt-auto d-inline-block text-decoration-none"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sair</span></a>
+                </div>-->
+                <a href="{{url_for('usuario.logoff')}}"
+                    class="text-danger mt-auto align-items-end mt-auto d-inline-block text-decoration-none"><i
+                        class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sair</span></a>
             </div>
             <div class="icon-chevron">
                 <i class="fa-solid fa-chevron-right"></i>
@@ -92,12 +106,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
-    setTimeout(function() {
-      document.querySelectorAll('.alert').forEach(function(alert) {
-        alert.style.transition = "opacity 0.5s";
-        alert.style.opacity = "0";
-        setTimeout(() => alert.remove(), 500);
-      });
+    setTimeout(function () {
+        document.querySelectorAll('.alert').forEach(function (alert) {
+            alert.style.transition = "opacity 0.5s";
+            alert.style.opacity = "0";
+            setTimeout(() => alert.remove(), 500);
+        });
     }, 3000);
-  </script>
+</script>
+
 </html>
