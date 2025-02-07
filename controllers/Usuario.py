@@ -129,7 +129,7 @@ def update_user():
 def deletar_user():
     if not current_user.is_authenticated:
         return redirect(url_for("login")) 
-    user = current_user
+    user = Usuario.query.get(current_user.id)
     logout_user()
     db.session.delete(user)
     db.session.commit()
