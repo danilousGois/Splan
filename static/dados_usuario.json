@@ -1,0 +1,26 @@
+[
+    {
+        "ID_Usuario": "00a601ab-2559-4ee2-9e88-a4df295ae654",
+        "nomeuser": "Danilo",
+        "email": "danilo@gmail.com",
+        "senha": "12345"
+    },
+    {
+        "ID_Usuario": "055fec0f-dcdc-462e-a3d9-fdfeec5f0e35",
+        "nomeuser": "danilo",
+        "email": "d@gmail.com",
+        "senha": "12"
+    },
+    {
+        "ID_Usuario": "13a514ca-7b0c-433c-8783-542885e179e6",
+        "nomeuser": "da",
+        "email": "d@gmail",
+        "senha": "12"
+    },
+    {
+        "ID_Usuario": "cd034255-d778-4f1b-a24e-e8a1853171cc",
+        "nomeuser": "clara",
+        "email": "clara@com",
+        "senha": "123"
+    }
+]
