@@ -33,7 +33,8 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 # db_host = os.getenv('DB_HOST')
 # db_mydb = os.getenv('DB_DATABASE')
 # conexao = f"mysql+pymysql://{db_usuario}:{db_senha}@{db_host}/{db_mydb}"
-conexao = "sqlite:///banco_splan.sqlite"
+basedir = os.path.abspath(os.path.dirname(__file__))
+conexao = f"sqlite:///{os.path.join(basedir, 'instance', 'banco_splan.sqlite')}"
 app.config['SQLALCHEMY_DATABASE_URI'] = conexao
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
