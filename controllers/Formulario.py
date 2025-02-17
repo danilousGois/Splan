@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, mak
 from models.Formulario import Formulario
 from models.Materia import Materia
 from models.Materia_peso import Materia_peso
+from models.Assunto import Assunto
 from utils import db, login_manager
 from flask_login import current_user
 from flask_login import login_user, logout_user, login_required
@@ -30,133 +31,78 @@ def processar_formulario():
 
 #cadastrar pesos e materias
    materias_selecionadas = request.form.getlist("materias[]")
+
+   lista_materias = ['matematica', 'portugues', 'fisica', 'quimica', 'biologia', 'geografia', 'historia', 'literatura', 'artes', 'filosofia', 'sociologia', 'ingles']
    
    dificuldades = {}
-   if "portugues" in materias_selecionadas:
-      dificuldade_portugues = request.form.get("dificuldade_portugues")
-      dificuldades["portugues"] = dificuldade_portugues
-      pegar_materia = Materia.query.filter_by(nome='portugues').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_portugues, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_portugues, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
+   soma_pesos = 0
+   
 
-   if "matematica" in materias_selecionadas:
-      dificuldade_matematica = request.form.get("dificuldade_matematica")
-      dificuldades["matematica"] = dificuldade_matematica
-      pegar_materia = Materia.query.filter_by(nome='matematica').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_matematica, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_matematica, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
+   for materia in lista_materias:
+      if materia in materias_selecionadas:
+         dificuldade = request.form['dificuldade_'+materia]
+         soma_pesos += int(dificuldade)
+         dificuldades[materia] = dificuldade
+         pegar_materia = Materia.query.filter_by(nome=materia).first()
+         id_mat = pegar_materia.id_materia
+         print(dificuldade, id_form, id_mat)
+         instancia = Materia_peso(dificuldade, id_form, id_mat)
+         db.session.add(instancia)
+         db.session.commit()
 
-   if "historia" in materias_selecionadas:
-      dificuldade_historia = request.form.get("dificuldade_historia")
-      dificuldades["historia"] = dificuldade_historia
-      pegar_materia = Materia.query.filter_by(nome='historia').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_historia, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_historia, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
+   
+   unidade_tempo = int(horas_estudo) / soma_pesos
 
-   if "biologia" in materias_selecionadas:
-      dificuldade_biologia = request.form.get("dificuldade_biologia")
-      dificuldades["biologia"] = dificuldade_biologia
-      pegar_materia = Materia.query.filter_by(nome='biologia').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_biologia, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_biologia, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-   if "quimica" in materias_selecionadas:
-      dificuldade_quimica = request.form.get("dificuldade_quimica")
-      dificuldades["quimica"] = dificuldade_quimica
-      pegar_materia = Materia.query.filter_by(nome='quimica').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_quimica, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_quimica, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-   if "geografia" in materias_selecionadas:
-      dificuldade_geografia = request.form.get("dificuldade_geografia")
-      dificuldades["geografia"] = dificuldade_geografia
-      pegar_materia = Materia.query.filter_by(nome='quimica').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_quimica, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_geografia, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-   if "filosofia" in materias_selecionadas:
-      dificuldade_filosofia = request.form.get("dificuldade_filosofia")
-      dificuldades["filosofia"] = dificuldade_filosofia
-      pegar_materia = Materia.query.filter_by(nome='filosofia').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_filosofia, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_filosofia, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-   if "sociologia" in materias_selecionadas:
-      dificuldade_sociologia = request.form.get("dificuldade_sociologia")
-      dificuldades["sociologia"] = dificuldade_sociologia
-      pegar_materia = Materia.query.filter_by(nome='sociologia').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_sociologia, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_sociologia, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-   if "ingles" in materias_selecionadas:
-      dificuldade_ingles = request.form.get("dificuldade_ingles")
-      dificuldades["ingles"] = dificuldade_ingles
-      pegar_materia = Materia.query.filter_by(nome='ingles').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_ingles, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_ingles, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-   if "artes" in materias_selecionadas:
-      dificuldade_artes = request.form.get("dificuldade_artes")
-      dificuldades["artes"] = dificuldade_artes
-      pegar_materia = Materia.query.filter_by(nome='artes').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_artes, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_artes, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-   if "fisica" in materias_selecionadas:
-      dificuldade_fisica = request.form.get("dificuldade_fisica")
-      dificuldades["fisica"] = dificuldade_fisica
-      pegar_materia = Materia.query.filter_by(nome='fisica').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_fisica, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_fisica, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-   if "literatura" in materias_selecionadas:
-      dificuldade_literatura = request.form.get("dificuldade_literatura")
-      dificuldades["literatura"] = dificuldade_literatura
-      pegar_materia = Materia.query.filter_by(nome='literatura').first()
-      id_mat = pegar_materia.id_materia
-      print(dificuldade_literatura, id_form, id_mat)
-      instancia = Materia_peso(dificuldade_literatura, id_form, id_mat)
-      db.session.add(instancia)
-      db.session.commit()
-
-
-   # resultado = "Matérias selecionadas e suas dificuldades:<br>"
-   # for materia, dificuldade in dificuldades.items():
-   #    resultado += f"{materia}: Dificuldade {dificuldade}<br>"
-   # print(resultado)
-   # print(horas_estudo)
+   tempos_materias = {materia: float(dificuldade) * unidade_tempo for materia, dificuldade in dificuldades.items()}
+   
+   print(dificuldades)
+   print(unidade_tempo)
+   print(tempos_materias)
+   print(materias_selecionadas)
+   print(soma_pesos)
+   print(dificuldades.keys())
+   print(dificuldades.values())
+  
 
    return redirect(url_for('inicio'))
+
+
+
+def dados_cronograma():
+   formulario = Formulario.query.filter_by(id_usuario=current_user.id).first()
+   lista_materias_pesos = Materia_peso.query.filter_by(id_formulario=formulario.id_formulario).all()
+   tempo_total = formulario.tempo_total
+   
+   soma_pesos = 0
+   materias_pesos = {}
+
+   for obj in lista_materias_pesos:
+      materia = Materia.query.filter_by(id_materia=obj.id_materia).first()
+      print(materia)
+      materias_pesos[materia.nome]=obj.peso
+      print(materias_pesos)
+      soma_pesos += obj.peso
+      print(soma_pesos)
+
+   unidade_tempo = float(tempo_total) / soma_pesos
+   print(unidade_tempo)
+
+   tempos_materias = {materia: float(dificuldade) * unidade_tempo for materia, dificuldade in materias_pesos.items()}
+   print(tempos_materias)
+
+   return tempos_materias
+
+@formulario_bp.route('cronograma')
+def criar_cronograma():
+   materias_pesos = dados_cronograma()
+
+   
+#desenvolver algoritmo para gerenciamento de progresso
+
+
+
+   # for chave in materias_pesos.keys():
+   #    materia = Materia.query.filter_by(nome=materia).first()
+   #    assuntos = Assunto.query.filter_by(id_materia=materia.id_materia).all()
+
+   return render_template('teste.html', materias_pesos=materias_pesos)

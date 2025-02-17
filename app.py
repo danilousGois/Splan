@@ -74,7 +74,7 @@ def carregar_cronograma():
 def dashboard_adm():
    return render_template('base_adm.html')
 
-      
+
 
 # @app.route('/debug_session')
 # def debug_session():

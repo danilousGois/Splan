@@ -119,17 +119,17 @@ nomes_assuntos = [
 ]
 
 
-def inserir_conteudos():
-    cont = 71
-    for assunto in nomes_assuntos:
-        cont += 1
-        for conteudo in assunto:
-            print(conteudo, cont)
-    return 'deu certoo'
+# def inserir_conteudos():
+#     cont = 71
+#     for assunto in nomes_assuntos:
+#         cont += 1
+#         for conteudo in assunto:
+#             print(conteudo, cont)
+#     return 'deu certoo'
 
 
 
-inserir_conteudos()
+# inserir_conteudos()
 
 
 
