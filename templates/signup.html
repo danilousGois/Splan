@@ -55,9 +55,10 @@
                         placeholder="Confirm Password" aria-label="default input" required>
                 </div>
                 <div>
-                    <select name="tipo_user">
-                        <option value="adm">Administrador</option>
+                    <select class="form-select form-select-criar-user bg-body-tertiary" aria-label="Default select example" name="tipo_user" required>
+                        <option selected disabled>Selecione um cargo</option>
                         <option value="comum">Usuário padrão</option>
+                        <option value="adm">Administrador</option>
                     </select>
                 </div>
                 <button type="submit" class="p-3 rounded-5 fw-semibold btn_cadastro border-1 m-auto mt-3 border-none w-100">Fazer cadastro</button>

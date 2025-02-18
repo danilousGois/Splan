@@ -12,8 +12,9 @@ from controllers.Conteudo import conteudo_bp
 from controllers.Formulario import formulario_bp
 from controllers.Progresso import progresso_bp
 from controllers.Materia_peso import peso_bp
-from flask_login import current_user
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from models.Assunto import Assunto
+from models.Conteudo import Conteudo
 
 app = Flask(__name__)
 
@@ -32,7 +33,8 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 # db_host = os.getenv('DB_HOST')
 # db_mydb = os.getenv('DB_DATABASE')
 # conexao = f"mysql+pymysql://{db_usuario}:{db_senha}@{db_host}/{db_mydb}"
-conexao = "sqlite:///banco_splan.sqlite"
+basedir = os.path.abspath(os.path.dirname(__file__))
+conexao = f"sqlite:///{os.path.join(basedir, 'instance', 'banco_splan.sqlite')}"
 app.config['SQLALCHEMY_DATABASE_URI'] = conexao
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -45,8 +47,8 @@ login_manager.login_view = "usuario.login_usuario"
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    flash("Por favor, faça login para acessar esta página!", 'warning')
-    return redirect(url_for('usuario.login_usuario'))
+   flash("Por favor, faça login para acessar esta página!", 'warning')
+   return redirect(url_for('usuario.login_usuario'))
 
 
 
@@ -67,6 +69,13 @@ def carregar_cronograma():
    return render_template('cronograma.html')
 
 
+@app.route('/dashboardadministrador')
+@login_required
+def dashboard_adm():
+   return render_template('base_adm.html')
+
+
+
 # @app.route('/debug_session')
 # def debug_session():
 #     from flask import session
@@ -74,5 +83,5 @@ def carregar_cronograma():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+   app.run(debug=True)
 

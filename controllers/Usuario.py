@@ -5,6 +5,8 @@ import hashlib
 from flask_login import current_user
 from flask_login import login_user, logout_user, login_required
 import re
+from models.Formulario import Formulario
+from models.Materia_peso import Materia_peso
 
 user_bp = Blueprint('usuario', __name__, template_folder='templates')
 
@@ -51,6 +53,9 @@ def criar_usuario():
     db.session.add(user)
     db.session.commit()
     login_user(user)
+    
+    if current_user.tipo_user == 'adm':
+        return redirect(url_for('dashboard_adm'))
     return redirect(url_for('formulario.carregar_formulario'))
     
 
@@ -72,6 +77,8 @@ def login_usuario():
         if user.senha == hash_senha:
             login_user(user)
             # print(f'Usuário logado: {user.id}')
+            if current_user.tipo_user == 'adm':
+                return render_template('base_adm.html')
             return redirect(url_for('inicio'))
         else:
             flash('Senha incorreta!', 'warning')
@@ -80,6 +87,7 @@ def login_usuario():
         flash('Email inválido!', 'warning')
         return redirect(url_for('usuario.login_usuario'))
     
+
 
 #fazer funcionalidade de exigir login para poder fazer update
 @user_bp.route('/alterarperfil', methods=['POST'])
@@ -129,11 +137,23 @@ def update_user():
 def deletar_user():
     if not current_user.is_authenticated:
         return redirect(url_for("login")) 
-    user = current_user
+    
+    #deletar formulario e materia_peso
+    form = Formulario.query.filter_by(id_usuario=current_user.id).first()
+    lista_materia_peso = Materia_peso.query.filter_by(id_formulario=form.id_formulario).all()
+    for obj in lista_materia_peso:
+        db.session.delete(obj)
+        db.session.commit()
+
+    db.session.delete(form)
+    db.session.commit()
+
+    user = Usuario.query.get(current_user.id)
     logout_user()
     db.session.delete(user)
     db.session.commit()
     session.pop('user', None)
+
     return redirect(url_for('index'))
 
 
