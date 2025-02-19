@@ -1,2 +1,3 @@
 # PSI
-Repositório atualizado: https://github.com/FilipiR22/splanPI.git
+Este projeto foi movido para outro repositório, acesse-o pelo link abaixo:
+> https://github.com/FilipiR22/splanPI.git
